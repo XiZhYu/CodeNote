@@ -1,0 +1,68 @@
+Git-Hub
+Git：现代软件版本管理系统
+
+GitHub网页版--------------------------------------------------------------
+	联网，提交每次的文档至网页版进行保存
+
+DOS常用命令---------------------------------------------------------------
+	help-查看帮助最直接
+	cd-change directory显示当前目录名称或将其更改
+	cls-清除屏幕
+	copy-复制文件
+	del-删除文件（没事别用）
+	dir-显示目录中的文件及其子文件夹	
+	
+Git Bash命令--------------------------------------------------------------
+首次使用
+	git config --global user.name 'XiZhYu'
+	git config --global user.email 'mechanics_xzy@163.com'
+准备工作
+	方式一：将网页版仓库克隆（下载）至本地
+		git clone https://...
+	方式二：创建新的git仓库
+		git init									初始化
+		git remote add origin https://...			使本地与远端关联
+		git pull --rebase origin master				代码合并，pull=fetch+merge
+													本地将出现README.md以及远端仓库中的其他文件
+	正常用法：将同一文件夹下面的需要记录修改信息的文件存成一个仓库
+三步走
+	①git add name.txt					缓存（计划改动）
+		git add *						缓存当前文件夹的全部文件
+	②git commit -m "描述"				提交（实际改动）
+	③git push							将本地仓库的改动推送至远端仓库
+		git push -u origin master		git init对应的push方式
+常用
+	git status							查看工作目录、缓存区
+	git log								查看已提交的快照
+	clear								清屏
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+xiezhuoyu
+mechanics_xzy@163.com
