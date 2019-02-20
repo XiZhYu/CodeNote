@@ -406,6 +406,7 @@ if( (fp=fopen(filename,“w”)) == NULL )
 //针对文本文件，读写（建议，慢但可见）
 fprintf (fp,”%d,%6.2f”,i,f);
 fscanf (fp,”%d,%f”,&i,&f);
+	%lf	//针对科学计数形式数据
 //针对二进制文件，读写
 fread (&data,sizeof(double),100,fp);//从fp文件中顺序读取100个double型数据，放入data中
 fwrite (&data,sizeof(double),100,fp);//差不多意思
