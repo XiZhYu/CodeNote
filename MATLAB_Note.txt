@@ -270,6 +270,8 @@ plot(x,y,'color',[rand rand rand],'linestyle','-','linewidth',2)
 	doc sin;%得到sin的使用说明文档
 	tic;	……;	toc;	time=toc;%用于计时
 %	%-注释
+%	%{...%}-多行注释！！！
+%	%%-分框架！！！
 %	...-续行
 %	.*-用于数组与数组对应元素之间的运算，".* ./ .^ "
 %	SHIFT+ENTER这个重命名方式很危险，尽量不要用
