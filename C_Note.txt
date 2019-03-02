@@ -1,4 +1,4 @@
-//C语言
+//C语言-Visual Studio Community 2017
 //编辑器+编译器=IDE集成开发环境
 //编辑.c/.h->编译.obj->链接.exe->运行
 
@@ -32,6 +32,8 @@ printf("a=%d",a);
 	FILE
 #include <math.h>
 	sqrt	开方
+	pow		平方
+	sin		正弦
 #include <stdlib.h>
 	malloc	动态分配内存，避不开指针
 	calloc
@@ -351,7 +353,7 @@ out:	//out标记处
 //%	l/ll	d
 //可以指定跳过
 scanf("%d,%d",&a,&b);//a,b为整数
-//double→%ld
+//double→%lf
 scanf_s		//VS建议
 
 a = getchar();	//接收一个字符
@@ -390,7 +392,7 @@ fp = fopen("E:\a_free\test.txt","r");
 	r	文本，打开，只读
 	r+	文本，打开，读写
 	w	文本，新建/清空，只写
-	w+	文本，新建/情况，读写
+	w+	文本，新建/清空，读写
 	a	文本，新建/尾端，追加
 	rb	二进制，只读
 	wb	二进制，只写
