@@ -1,4 +1,5 @@
 %MATLAB R2013b
+%Octave---支持MATLAB语法，开源（无MATLAB工具箱）
 
 %-------------------------------------------------------------------------------
 %希腊字母
@@ -100,6 +101,10 @@
 
 %范数计算
 	norm(A);%A可以是向量或者矩阵
+	
+%CELL类型{}
+	A = {1:1:2 , 1:1:10};%用于存储不同类型的数据
+	A{1};%调用方式
 %-------------------------------------------------------------------------------矩阵处理
 
 %----------------------------------------------------------------------作图---------
@@ -173,16 +178,7 @@
 %画图不覆盖
 	figure;%更直接，直接打开下一个图形窗口
 
-%显示特殊字符
-	%^ == 上标
-	%_ == 下标
-	%\alpha == α
-	%\ 用于显示原字符
-
 %figure中取点的数据精度可调，右键edit，save，再select
-
-%翻转/对数坐标
-	set(gca,'XDir','reverse','XScale','log');
 
 %复制图像至word不清晰，解决方案：控制窗口位置、大小
 	set(gcf, 'position', [1000 200 500 400]);
@@ -212,6 +208,38 @@
 %清空figure图形
 	cla reset;
 
+%输出图形
+	%存emf比较清晰
+	%直接copy虽然清晰，但会导致不能二次改变大小
+	print -djpeg -r200 my.jpeg;%自定义大小，比默认舒服，另外也支持png\tiff
+
+%关于句柄
+	x = 1:10;
+	y = x.^3;
+	hfig = figure('Name','Function');
+	hfig2 = figure('Name','Function2');
+	hax = axes('Parent',hfig);
+	hax2 = axes('Parent',hfig2);
+	hpl = plot(hax,y,x,'Color','green');
+	hpl2 = plot(hax2,x,y,'Color','red');
+	get(hpl);%可以得到hpl的可调节参数信息
+
+%随机线条颜色
+	plot(x,y,'color',[rand rand rand],'linestyle','-','linewidth',2)
+%-------------------------------------------------------------------------------作图
+
+%----------------------------------------Octave图形微调------------------------------------
+%Octave无图形编辑窗口，只支持命令编辑
+%学习建议：直接MATLAB修改图形后，生成代码粘贴到Octave
+%显示特殊字符
+	%^ == 上标
+	%_ == 下标
+	%\alpha == α
+	%\ 用于显示原字符
+
+%翻转/对数坐标
+	set(gca,'XDir','reverse','XScale','log');
+
 %标注
 	text(x,y,'(x,y)');
 
@@ -233,25 +261,42 @@
 	axis auto normal;%默认xy比例
 	axis off;
 
-%输出图形
-	%存emf比较清晰
-	%直接copy虽然清晰，但会导致不能二次改变大小
-	print -djpeg -r200 my.jpeg;%自定义大小，比默认舒服，另外也支持png\tiff
+%单个图形
+	fig1 = figure;%取得句柄
+	axes1 = axes('Parent',fig1,'FontSize',15);%坐标轴
+	box(axes1,'on');%是否画框架
+	hold(axes1,'all');
+	plot(x_Exa,y_Exa,'Parent',axes1,'LineWidth',5,'LineStyle','-.','Marker','o','Color',[0 0 1],'DisplayName','ExactSolution');
+	plot(x2,y2,'Parent',axes1,'LineWidth',2,'Color',[1 0 0],'DisplayName','SimulationSolution');
+	title('\DeltaX=0.05','FontWeight','bold','FontSize',15,'FontName','Times New Roman','FontAngle','normal');
+	leg1 = legend(axes1,'show');
+	set(leg1,'Location','NorthWest','FontWeight','bold','FontName','Times New Roman','FontAngle','normal','FontSize',15);
 
-%关于句柄
-	x = 1:10;
-	y = x.^3;
-	hfig = figure('Name','Function');
-	hfig2 = figure('Name','Function2');
-	hax = axes('Parent',hfig);
-	hax2 = axes('Parent',hfig2);
-	hpl = plot(hax,y,x,'Color','green');
-	hpl2 = plot(hax2,x,y,'Color','red');
-	get(hpl);%可以得到hpl的可调节参数信息
-
-%随机线条颜色
-plot(x,y,'color',[rand rand rand],'linestyle','-','linewidth',2)
-%-------------------------------------------------------------------------------作图
+%多个图形
+	%用subplot替代axes
+	%注意画图的先后顺序！
+	fig1 = figure;
+	for i = 1:1:length(n)
+		sub(i) = subplot(3,2,i,'Parent',fig1,'FontSize',15);
+		box(sub(i),'on');
+		hold(sub(i),'all');
+		plot(x_Exa,y_Exa,'Parent',sub(i),'LineWidth',5, ...
+			'LineStyle','-','Color',[0 0 0],'DisplayName','Exact');
+		plot(x{i},y{i},'Parent',sub(i),'LineWidth',2, ...
+			'LineStyle','--','Marker','o','Color',[1 0 0], ...
+			'DisplayName','Simulation');
+		xlabel('x');ylabel('y');
+		title(['\DeltaX=',num2str(n(i))],'FontWeight', ...
+			'bold','FontSize',15,'FontName', ...
+			'Times New Roman','FontAngle','normal');
+	end
+	for i = 1:1:length(n)
+		leg(i) = legend(sub(i),'show');
+		set(leg(i),'Location','NorthWest','FontWeight','bold', ...
+			'FontName','Times New Roman','FontAngle', ...
+			'normal','FontSize',10);
+	end
+%----------------------------------------------------------------------------Octave图形微调
 
 %---------------------------------------------------------------------------编程常用----
 	clc,clear;%清屏，清除所有变量
@@ -397,6 +442,7 @@ plot(x,y,'color',[rand rand rand],'linestyle','-','linewidth',2)
 %解方程组
 	x=A\b;
 	x=inv(A)*b;
+	x=pinv(A)*b;%伪逆
 
 %解齐次方程组，即b元素全为0
 	null(A);%规范正交基

@@ -376,6 +376,7 @@ printf("The value of a is %d \n",a);
 %s	//字符串，如："CHINA"
 %e	//指数形式
 	%9.2e	//1.23e+002
+	%12.6e
 %p	//内存数据地址
 
 putchar(a);	//输出一个字符，如：a='A'
