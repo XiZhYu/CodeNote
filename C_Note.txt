@@ -42,11 +42,13 @@ printf("a=%d",a);
 	realloc
 	system
 #include <time.h>
-	time
+	time//计时单位：s
 		//三种都可以将时间给tic
 		int tic = (int)time(NULL);
 		int tic = (int)time(0);
 		time(&tic);
+	clock//计时单位：ms
+		int tic = clock();
 #include <stdbool.h>
 	bool
 	
@@ -179,6 +181,14 @@ free(p);	//释放第一维指针
 //若new>former，找个新空间
 //若new<former，直接在原空间截断
 p = (int *)realloc(former,(new)*sizeof(int));
+
+
+//链表linked-list
+typedef struct _node
+{
+	double value;//值
+	struct _node *next;//下一个值的位置
+} Node;
 
 
 //运算符------------------------------------------------------------------
@@ -474,7 +484,10 @@ srand((unsigned)time(NULL));	//随机种子为当前时间，srand参数类型�
 		printf("ERROR in %s %s!\n", __FILE__, __func__);
 		system("pause"); exit(0);
 	}
-
+//工具栏-调试-快速监视
+	a//变量
+	a,3//向量
+	a[0],3//数组
 
 //Tips
 //代码复制是代码不良的表现
