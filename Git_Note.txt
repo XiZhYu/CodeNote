@@ -1,69 +1,60 @@
 Git-Hub
-Git：现代软件版本管理系统
+Git：现代软件版本管理系统，分散式版本管理
+  Linux 用户安装：sudo apt-get install git
 
 GitHub网页版--------------------------------------------------------------
 	联网，提交每次的文档至网页版进行保存
 
-DOS常用命令---------------------------------------------------------------
-	help-查看帮助最直接
-	cd-change directory显示当前目录名称或将其更改
-	cls-清除屏幕
-	copy-复制文件
-	del-删除文件（没事别用）
-	dir-显示目录中的文件及其子文件夹	
 	
 Git Bash命令--------------------------------------------------------------
-首次使用
+初始化
 	git config --global user.name 'XiZhYu'
 	git config --global user.email 'mechanics_xzy@163.com'
-准备工作
+仓库
+    cd ../yourWorkSpace
 	方式一：将网页版仓库克隆（下载）至本地
-		git clone https://...
-	方式二：创建新的git仓库
-		git init									初始化
-		git remote add origin https://...			使本地与远端关联
-		git pull --rebase origin master				代码合并，pull=fetch+merge
+		[a] git clone https://...    匿名只读，自动创建远程连接名：origin
+		[b] git clone ssh://user@host...    读写
+		[c] git clone /path/to/repository
+	方式二：创建新的git仓库（常用于创建中央仓库）
+		[1] git init									初始化
+		[2] git remote add origin_xzy https://...			使本地与远端关联，origin_xzy为https地址的别名
+		[3] git pull --rebase origin_xzy master				代码合并，pull=fetch+merge
 													本地将出现README.md以及远端仓库中的其他文件
 	正常用法：将同一文件夹下面的需要记录修改信息的文件存成一个仓库
 三步走
-	①git add name.txt					缓存（计划改动）
-		git add *						缓存当前文件夹的全部文件
-	②git commit -m "描述"				提交（实际改动）
-	③git push							将本地仓库的改动推送至远端仓库
-		git push -u origin master		git init对应的push方式
+	[1] git add name.txt					缓存（计划改动）
+		  git add *						缓存当前文件夹的全部文件
+		  git add *.txt					缓存当前文件夹的全部txt文件
+		  git add workSpace    缓存目录下的所有更改
+	[2] git commit -m "描述"				提交（实际改动）
+	      git commit --amend    修改最新提交
+	[3] git push							将本地仓库的改动推送至远端仓库
+		  git push -u origin_xzy master		git init对应的push方式
+		  git push origin_xzy master/branch	push到master或branch
+
+		
 常用
 	git status							查看工作目录、缓存区
 	git log								查看已提交的快照
-	clear								清屏
+	  git log --graph --decorate --oneline
+	git checkout    检出（寻找到）
+	  [1]git checkout a1e8fb5    回滚到旧版本a1e8fb5，测试
+	       git checkout a1e8fb5 test.cpp    回滚到旧版本a1e8fb5的test，测试
+	       git checkout HEAD test.cpp    若需要回到当前版本
+	  [2]git checkout master/branch    回到当前状态，继续开发
+	git reset    重设：撤销提交、缓存的快照，不推荐使用，除非撤销的就是本地上一个提交、缓存，push之后绝对不要用reset
+	  git reset --hard    作死清除所有未提交的更改及之后提交
+	git revert    撤销：实质是产生一个等价于“撤销提交的快照”的新提交，避免项目历史丢失
+	git clean -xf    删除当前目录未被跟踪的文件，以及git通常忽略的文件，常用于build空间之后
+	git rebase    将分支从一个提交移到了另一个
+	git fetch    拉取仓库中所有的分支
+	git merge    并入本地分支
 
-
-小心使用
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	
+基本概念-----------------------------------------------------------------
+中央仓库：创建为裸仓库，即无工作目录的干净仓库，作为存储设施
+本地仓库：创建为非裸仓库，作为开发环境
 
 xiezhuoyu
 mechanics_xzy@163.com

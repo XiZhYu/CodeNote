@@ -1,6 +1,9 @@
 Linux
 基于Ubuntu
 
+终端快捷键
+Ctrl+Alt+t
+
 帮助命令
 man cd		详细
 help cd		简明
@@ -28,7 +31,19 @@ mkdir dir1 创建一个叫做 'dir1' 的目录
 rm -f file1 删除一个叫做 'file1' 的文件
 mv dir1 new_dir 重命名/移动 一个目录 
 find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
+touch test.txt   新建文件
 
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
 unzip file1.zip 解压一个zip格式压缩包
+
+
+/etc 系统管理和配置文件
+/home 用户主目录的基点
+/lib 标准程序设计库，又叫动态链接共享库
+/tmp 公用的临时文件存储点
+/root 系统管理员的主目录
+/usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
+/src 源代码
+/dev 目录存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备
+
