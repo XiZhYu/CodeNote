@@ -330,7 +330,15 @@
 
 %查看程序进展
 	tic;
-	……
+    x_waitbar=waitbar(0,'please wait');%难等，设置进度条
+    for i = 1:1:N %域内
+      if ( mod(i,100)==0 )
+        waitbar(i/N,x_waitbar,['求解...',num2str(100*i/N),'%']);%进度条
+      end
+	...
+    end
+    delete (x_waitbar);%清除进度条
+	...
 	beep,pause(0.5),beep,pause(0.5),beep;%程序结束提示音
 	time=toc;
 	disp(['THE END!     ','已用时：',num2str(toc),'s']);

@@ -29,9 +29,11 @@ pwd 显示工作路径
 ls 查看目录中的文件
 mkdir dir1 创建一个叫做 'dir1' 的目录
 rm -f file1 删除一个叫做 'file1' 的文件
+rm -rf file1 删除一个叫做 'file1' 的文件夹
 mv dir1 new_dir 重命名/移动 一个目录 
 find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
 touch test.txt   新建文件
+gedit filename 创建并编辑filename文件
 
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
@@ -46,4 +48,15 @@ unzip file1.zip 解压一个zip格式压缩包
 /usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
 /src 源代码
 /dev 目录存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备
+
+
+C++程序(Hello.cc)运行，生成可执行文件(Hello)
+  g++ Hello.cc -o Hello
+运行可执行文件
+  ./Hello
+
+apt-get update 更新软件
+apt-get install paraview 安装软件paraview
+apt-get upgrade paraview  升级软件paraview
+apt-get autoremove paraview 卸载软件paraview
 

@@ -58,6 +58,7 @@ OFFICE 2013-WORD
   分页：分页效果
   分节：可以将页码、纸张方向、大小等效果分隔开，重新设置
 10.审阅中的修订功能，常用来帮他人修改论文
+11.Ctrl+Shift+Fn+F9  取消超链接
 	
 mechanics_xzy@163.com
 xiezhuoyu
