@@ -59,4 +59,7 @@ apt-get update 更新软件
 apt-get install paraview 安装软件paraview
 apt-get upgrade paraview  升级软件paraview
 apt-get autoremove paraview 卸载软件paraview
+apt-get remove --purge paraview 卸载软件并清除配置文件
+
+dpk -l  查看已安装软件包
 
