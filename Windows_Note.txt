@@ -59,6 +59,16 @@ OFFICE 2013-WORD
   分节：可以将页码、纸张方向、大小等效果分隔开，重新设置
 10.审阅中的修订功能，常用来帮他人修改论文
 11.Ctrl+Shift+Fn+F9  取消超链接
+12.论文图片质量要求
+  向量图
+    杂志建议：EPS（Illustrator与PS的格式）,PDF
+	其他格式：ai,emf,wmf
+  位图
+    杂志建议：tiff,jpeg（静止图像压缩标准）
+	其他格式：jpg,png,bmp
+      彩、灰度图：>300dpi
+	  曲线图：>1000dpi
+	  组合图：>500dpi
 	
 mechanics_xzy@163.com
 xiezhuoyu
