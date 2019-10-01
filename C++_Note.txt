@@ -97,7 +97,7 @@ bool-逻辑值
 	#include <vector>
 	//模板vector，用于取代数组和指针
 	vector<double> a(3,0.0);//一维数组a，三个元素，初值为0.0
-	vector<vector<bouble>> b(3,vector<double>(2,0.0));//二维数组b，3行2列，初值为0.0
+	vector<vector<double>> b(3,vector<double>(2,0.0));//二维数组b，3行2列，初值为0.0
 	vector<vector<bouble>> c{{1,2,3},{4,5,6},{7,8,9}};//二维数组c，3行3列，
 	cout << c[0][0] << endl;//元素操作
 	c.push_back(vector<double>(3,10));//c新增第4行，且有三个元素，值为10

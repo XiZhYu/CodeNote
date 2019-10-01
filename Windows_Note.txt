@@ -69,6 +69,12 @@ OFFICE 2013-WORD
       彩、灰度图：>300dpi
 	  曲线图：>1000dpi
 	  组合图：>500dpi
-	
+13.不用ENDNOTE连续引用多篇文献
+  文尾编号，文中引用序号
+  编辑域代码，加  留前括号：\#"[0"   留后括号：\#"0]"
+  
+  
+  
+  
 mechanics_xzy@163.com
 xiezhuoyu

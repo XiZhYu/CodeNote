@@ -275,7 +275,7 @@ int main()
 //如果将原型说明（声明）放在文件开头，所有函数都可以调用
 //声明时，若无变量需要传入，建议写为fun(void)，main除外
 //外部函数：其他文件可调用，默认
-int fun_x(int a, double b)//a,b在函数中为形参，在主函数调用中为实参中为实参
+int fun_x(int a, double b)//a,b在函数中为形参，在主函数调用中为实参中
 {
 	int c;
 	return c;
