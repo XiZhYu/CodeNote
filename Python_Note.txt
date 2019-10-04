@@ -1,6 +1,21 @@
 #代替MATLAB作图
 #基于matplotlib包,https://matplotlib.org/3.1.1/gallery/index.html
 
+#希腊字母=============================================================
+#	α alpha			ν nu
+#	β beta			ξ, Ξ xi
+#	γ, Γ gamma		o omicron
+#	δ, Δ delta 		π, Π pi
+#	ε epsilon 		ρ rho
+#	ζ zeta 			σ, Σ sigma
+#	η eta 			τ tau
+#	θ, Θ theta 		υ, Υ upsilon
+#	ι iota 			φ, Φ phi
+#	κ kappa 		χ chi
+#	λ, Λ lambda 	ψ, Ψ psi
+#	μ mu 			ω, Ω omega
+
+
 #开头固定格式
 import matplotlib.pyplot as plt  #导入绘图包，给别名
 import numpy as np  #导入包，给别名
@@ -16,7 +31,7 @@ line1, = plt.plot(x,y1,color='red',linewidth=1.0,linestyle='--')
 line2, = plt.plot(x,y2,color='blue',linewidth=1.0,linestyle='-.')
 
 plt.xlabel('x')  #x轴标签
-plt.xlabel('y')
+plt.ylabel('y')
 
 plt.grid(linestyle = "--")      #设置背景网格线为虚线
 
@@ -113,6 +128,11 @@ fX.close()
 fY.close()
 fZ.close()
 #文本数据的输入输出=======================================================
+
+#标注=====================================================================
+#直接使用Tex格式
+r'$\alpha_1>\beta^2$'  #r$...$格式
+#标注=====================================================================
 
 #mechanics_xzy@163.com
 #XieZhuoYu
