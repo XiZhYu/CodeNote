@@ -15,6 +15,21 @@
 #	λ, Λ lambda 	ψ, Ψ psi
 #	μ mu 			ω, Ω omega
 
+#二维数据表达=============================================================
+#数据最好不依赖颜色区分
+#间断性数据marker=''
+  # 1 +
+  # ^ o
+  # ^ s o
+  # ^ s * o
+  #空心处理，mfc='none'即markerFaceColor为空白
+  #边界颜色，mec='black'即markerEdgeColor为黑色
+#连续性数据linestyle=''
+  # -- -
+  # -. -- -
+  # : -. -- -
+  # dotted dashdot dashed solid
+#二维数据表达=============================================================
 
 #开头固定格式
 import matplotlib.pyplot as plt  #导入绘图包，给别名
@@ -27,8 +42,8 @@ y2 = x**2
 
 plt.figure(figsize=(5,5))  #创建一个figure，给定长宽
 
-line1, = plt.plot(x,y1,color='red',linewidth=1.0,linestyle='--')
-line2, = plt.plot(x,y2,color='blue',linewidth=1.0,linestyle='-.')
+line1, = plt.plot(x,y1,color='red',linewidth=1.0,linestyle='--',marker='^',markersize=5,markevery=5,mfc='none')
+line2, = plt.plot(x,y2,color='blue',linewidth=1.0,linestyle='-.',marker='o',markersize=5,markevery=5,mfc='none')
 
 plt.xlabel('x')  #x轴标签
 plt.ylabel('y')
