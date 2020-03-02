@@ -2,26 +2,29 @@ Git-Hub
 Git：现代软件版本管理系统，分散式版本管理
   Linux 用户安装：sudo apt-get install git
 
+	
+基本概念-----------------------------------------------------------------
+远程仓库（repository）（中央仓库）：创建为裸仓库，即无工作目录的干净仓库，作为存储设施
+本地仓库：创建为非裸仓库，作为开发环境
+分支（branch）：master分支为主分支，一般为稳定可用的代码，其他分支可用于开发新版本，次分支的新功能后期可以合并至master分支
+
 GitHub网页版--------------------------------------------------------------
 	联网，提交每次的文档至网页版进行保存
-
 	
 Git Bash命令--------------------------------------------------------------
-初始化
+初始化配置
 	git config --global user.name 'XiZhYu'
 	git config --global user.email 'mechanics_xzy@163.com'
 仓库
     cd ../yourWorkSpace
-	方式一：将网页版仓库克隆（下载）至本地
+	方式一：将远程仓库克隆（下载）至本地，同时会自动关联本地与远程
 		[a] git clone https://...    匿名只读，自动创建远程连接名：origin
 		[b] git clone ssh://user@host...    读写
 		[c] git clone /path/to/repository
-	方式二：创建新的git仓库（常用于创建中央仓库）
+	方式二：创建新的git本地仓库，再链接至远程仓库
 		[1] git init									初始化
-		[2] git remote add origin_xzy https://...			使本地与远端关联，origin_xzy为https地址的别名
-		[3] git pull --rebase origin_xzy master				代码合并，pull=fetch+merge
-													本地将出现README.md以及远端仓库中的其他文件
-	正常用法：将同一文件夹下面的需要记录修改信息的文件存成一个仓库
+		[2] git remote add name_xzy https://...			使本地与远端关联，name_xzy为https地址的别名,https地址是关键
+		[3] git pull -u name_xzy master				代码合并，pull=fetch+merge，将本地文件push至name_xzy仓库的master分支
 三步走
 	[1] git add name.txt					缓存（计划改动）
 		  git add *						缓存当前文件夹的全部文件
@@ -30,8 +33,8 @@ Git Bash命令--------------------------------------------------------------
 	[2] git commit -m "描述"				提交（实际改动）
 	      git commit --amend    修改最新提交
 	[3] git push							将本地仓库的改动推送至远端仓库
-		  git push -u origin_xzy master		git init对应的push方式
-		  git push origin_xzy master/branch	push到master或branch
+		  git push -u name_xzy master		git init对应的push方式
+		  git push name_xzy master/branch	push到master或branch
 
 		
 常用
@@ -51,10 +54,7 @@ Git Bash命令--------------------------------------------------------------
 	git fetch    拉取仓库中所有的分支
 	git merge    并入本地分支
 
-	
-基本概念-----------------------------------------------------------------
-中央仓库：创建为裸仓库，即无工作目录的干净仓库，作为存储设施
-本地仓库：创建为非裸仓库，作为开发环境
+
 
 xiezhuoyu
 mechanics_xzy@163.com
