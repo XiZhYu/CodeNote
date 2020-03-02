@@ -6,7 +6,7 @@ Ctrl+Alt+t
 
 帮助命令
 man cd		详细
-help cd		简明
+cd --help	简明
 info cd		完整
 
 
@@ -27,18 +27,22 @@ cd ../.. 返回上两级目录
 cd 进入个人的主目录 
 pwd 显示工作路径 
 ls 查看目录中的文件
+  l  查看，区分文件与文件夹
 mkdir dir1 创建一个叫做 'dir1' 的目录
 rm -f file1 删除一个叫做 'file1' 的文件
   rm -f CASE1_*  统配符*适用
 rm -rf file1 删除一个叫做 'file1' 的文件夹
-mv dir1 new_dir 重命名/移动 一个目录 
+mv dir1 new_dir 重命名/移动 一个目录
+cp -r File1 File2  复制File1到File2
+  cp file.zip ./ 复制file文件到当前目录
 find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
 touch test.txt   新建文件
 gedit filename 创建并编辑filename文件
+unset $FOAM_RUN  清除某一个环境变量
 
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
-unzip file1.zip 解压一个zip格式压缩包
+unzip file1.zip 解压一个!zip格式压缩包
 
 
 /etc 系统管理和配置文件
@@ -55,12 +59,16 @@ C++程序(Hello.cc)运行，生成可执行文件(Hello)
   g++ Hello.cc -o Hello
 运行可执行文件
   ./Hello
+python程序
+  python3 CASE.py
+
 
 apt-get update 更新软件
+  /etc/apt/sources.list  将源修改为USTC源
 apt-get install paraview 安装软件paraview
 apt-get upgrade paraview  升级软件paraview
 apt-get autoremove paraview 卸载软件paraview
 apt-get remove --purge paraview 卸载软件并清除配置文件
 
 dpkg -l  查看已安装软件包
-
+python3 xzy.py | tee recorder.log  记录屏幕输出至log文件

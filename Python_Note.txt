@@ -1,4 +1,4 @@
-#代替MATLAB作图
+#代替MATLAB计算与作图
 #基于matplotlib包,https://matplotlib.org/3.1.1/gallery/index.html
 
 #希腊字母=============================================================
@@ -14,6 +14,110 @@
 #	κ kappa 		χ chi
 #	λ, Λ lambda 	ψ, Ψ psi
 #	μ mu 			ω, Ω omega
+#希腊字母=============================================================
+
+#语法=====================================================================
+#参考：https://www.runoob.com/python3
+#缩进的空格数是可变的，但是同一个代码块的语句必须包含相同的缩进空格数
+#使用反斜杠\或者省略号"..."来实现续行， [], {}, 或 () 中不需要使用
+#变量不需要声明
+#''和""使用完全相同
+#索引值以 0 为开始值，-1 为从末尾的开始位置
+#转义字符：\n-换行  \t-横向制表符  \r-回车
+
+#导入包
+import numpy  #导入矩阵计算包
+from numpy import linspace  #numpy包导入linspace函数
+import math  #导入数学计算包
+#数学函数：ceil  exp  fabs  floor  log  log10  max  min  pow  round  sqrt
+#三角函数：sin  cos  tan  asin  acos  atan
+#常用数值：math.pi  math.e
+import random  #导入随机数学计算包
+#随机数函数：random()  seed()
+
+#数据类型：数字number、字符串string、列表list、元组tuple、集合set、字典dictionary
+#  +  -  *  /  //  %  **
+#  加 减 乘 除  商  余 幂
+#  ==  !=  >  <  >=  <=
+
+#数字类型：整数int、浮点数float、布尔型bool和复数complex
+a = 7
+b = 7.7
+c = True
+d = 7+8j
+print(type(a),"is",a,"\n",type(b),"is",b,"\n",type(c),"is",c,"\n",type(d),"is",d,"\n")
+
+#字符串String
+hi = "HELLO lemon!"
+print(hi,"\n",hi[0:7:2])  #注意：与MATLAB不同，为“起点：终点：步长”
+print(hi[-1::-1])  #倒数，“空”表示数到最后
+
+#列表List，内容可修改
+aL = [777, "abc",  7.77, 77+7j]
+print(aL[0],aL[1],aL[-1])
+
+#元组Tuple
+aT = [777, "abc",  7.77, 77+7j]
+print(aT[0],aT[1],aT[-1])
+
+#集合Set
+aS = {777, "abc", 777, 7.77, 77+7j}
+print(aS)
+
+#字典Dictionary
+aD = {"Mon": 1, "Tue":2, "Wed":"wednesday"}
+#aD = dict(Mon = 1, Tue = 2, Wed = "wednesday")
+print(aD.keys())
+print(aD.values())
+print(aD["Mon"])
+
+#输入输出
+a = input("please enter:")
+print("the number is ",a)
+
+#判断语句
+a = 10
+b = 7
+if a > b:
+  print(a)
+elif a == b:
+  print("a=b")
+else:
+  print(b)
+
+#while循环（可加else）
+a = 1
+while a <= 3
+  print(a)
+  a+=1
+print(a)
+
+#for循环(可用break和continue)
+for i in np.arange(1,10,2):
+  print(i)
+
+#矩阵的运算
+a = np.zeros((3,3))  #全0矩阵
+b = np.ones((3,3))  #全1矩阵
+d = np.eye(3,3) * 10  #对角线矩阵
+c = np.mat([[1,2,3],[4,5,6],[7,8,10]])  #创建mat矩阵
+print(np.shape(c))
+print(np.multiply(c,c))  #点乘
+print(c.T)  #转置
+print(c.I)  #逆
+print(np.linalg.matrix_rank(c))  #秩
+print(np.linalg.det(c))  #行列式
+print(np.trace(c))  #迹
+print(np.sum(c[:,0]))  #:符号
+print(np.max(c))  #最值
+print(np.argmax(c))  #最值ID
+print(np.vstack((c,c)))  #纵向扩展
+print(np.hstack((c,c)))  #横向扩展
+#语法=====================================================================
+
+#画图-开头固定格式
+import matplotlib.pyplot as plt  #导入绘图包，给别名
+import numpy as np  #导入包，给别名
 
 #二维数据表达=============================================================
 #数据最好不依赖颜色区分
@@ -30,10 +134,6 @@
   # : -. -- -
   # dotted dashdot dashed solid
 #二维数据表达=============================================================
-
-#开头固定格式
-import matplotlib.pyplot as plt  #导入绘图包，给别名
-import numpy as np  #导入包，给别名
 
 #CASE1====================================================================
 x = np.linspace(-3,3,100)
@@ -148,6 +248,12 @@ fZ.close()
 #直接使用Tex格式
 r'$\alpha_1>\beta^2$'  #r$...$格式
 #标注=====================================================================
+
+#UBUNTU下运行python程序===================================================
+sudo apt-get install python3-numpy
+sudo apt-get install python3-matplotlib
+python3 xzy_name.py
+#UBUNTU下运行python程序===================================================
 
 #mechanics_xzy@163.com
 #XieZhuoYu
