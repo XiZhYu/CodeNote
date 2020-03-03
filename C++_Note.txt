@@ -36,7 +36,10 @@ class son_name_XZY: public nameXZY
     int new_a;
 }
 
-//模板
+//函数模板，有问题！
+template <class type_xzy1> type_xzy2 fun_xzy(int a, int b)
+//类模板
+template <class type_xzy3> type_xzy4 class_xzy{}
 
 //数据类型：
 int-整数
