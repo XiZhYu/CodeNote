@@ -24,7 +24,8 @@ Git Bash命令--------------------------------------------------------------
 	方式二：创建新的git本地仓库，再链接至远程仓库
 		[1] git init									初始化
 		[2] git remote add name_xzy https://...			使本地与远端关联，name_xzy为https地址的别名,https地址是关键
-		[3] git pull -u name_xzy master				代码合并，pull=fetch+merge，将本地文件push至name_xzy仓库的master分支
+		[3] git push -u name_xzy master				将本地文件push至name_xzy仓库的master分支，可以直接用网址替代name_xzy
+		在不同本地仓库使用remote，别名name_xzy会记录在对应文件夹中的.git中，之后在对应文件夹使用push，即可push至对应的远程仓库
 三步走
 	[1] git add name.txt					缓存（计划改动）
 		  git add *						缓存当前文件夹的全部文件
