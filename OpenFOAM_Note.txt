@@ -1,0 +1,47 @@
+OpenFOAM-7
+
+OpenFOAM-v1912安装
+官方在Ubuntu 16.04 LTS通过测试
+预先安装依赖项：
+    sudo apt-get update
+    sudo apt-get install build-essential flex bison cmake zlib1g-dev libboost-system-dev libboost-thread-dev libopenmpi-dev openmpi-bin gnuplot libreadline-dev libncurses-dev libxt-dev
+    sudo apt-get install qt4-dev-tools libqt4-dev libqt4-opengl-dev freeglut3-dev libqtwebkit-dev
+并行相关：
+    sudo apt-get install libscotch-dev libcgal-dev
+解压压缩包：
+    tar -xzf OpenFOAM-v1912.tgz
+    tar -xzf ThirdParty-v1912.tgz
+若非默认安装位置，需要更改etc/bashrc.中的foamInstall
+在$HOME/.bashrc尾加（多版本需要注意不同）：
+    source ~/OpenFOAM/OpenFOAM-v1912/etc/bashrc
+编译：
+    编译ParaView
+        cd $WM_THIRD_PARTY_DIR
+        ./makeParaView
+    CGAL相关 etc/config.sh/CGAL 
+        cgal_version=CGAL-4.9.1
+    Boost相关 etc/config.sh/CGAL
+        boost_version=boost-system
+        boost_version=boost_1_64_0
+    编译OpenFOAM
+        foamSystemCheck
+        foam
+        ./Allwmake
+查看是否安装成功：
+    foamInstallationTest
+    mkdir -p $FOAM_RUN
+    run
+    cp -r $FOAM_TUTORIALS/incompressible/simpleFoam/pitzDaily ./
+    cd pitzDaily
+    blockMesh
+    simpleFoam
+    paraFoam
+
+多版本共存
+gedit $HOME/.bashrc
+alias of3x="source ~/OpenFOAM/OpenFOAM-3.x/etc/bashrc"
+alias of4x="source ~/OpenFOAM/OpenFOAM-4.x/etc/bashrc"
+以后每次使用前，先输入（指定）of3x或of4x即调用指定版本
+
+//xiezhuoyu
+//mechanics_xzy@163.com
