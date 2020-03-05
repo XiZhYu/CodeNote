@@ -27,7 +27,7 @@ Git Bash命令--------------------------------------------------------------
 		[3] git push -u name_xzy master				将本地文件push至name_xzy仓库的master分支，可以直接用网址替代name_xzy
 		在不同本地仓库使用remote，别名name_xzy会记录在对应文件夹中的.git中，之后在对应文件夹使用push，即可push至对应的远程仓库
 三步走
-	[1] git add name.txt					缓存（计划改动）
+	[1] git add name.txt					缓存（计划改动），单独提交文件，可单独进行说明
 		  git add *						缓存当前文件夹的全部文件
 		  git add *.txt					缓存当前文件夹的全部txt文件
 		  git add workSpace    缓存目录下的所有更改
