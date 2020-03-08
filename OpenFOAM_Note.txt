@@ -1,3 +1,4 @@
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 OpenFOAM-7
 
 OpenFOAM-v1912安装
@@ -15,7 +16,7 @@ OpenFOAM-v1912安装
 在$HOME/.bashrc尾加（多版本需要注意不同）：
     source ~/OpenFOAM/OpenFOAM-v1912/etc/bashrc
 编译：
-    编译ParaView（3小时）
+    编译ParaView（7小时，建议睡一觉）
         cd $WM_THIRD_PARTY_DIR
     <（安装失败可能为dash/bash问题，cd,ls -l /bin/sh）
     在makeParaView脚本第一行：#!/bin/bash
@@ -42,6 +43,225 @@ gedit $HOME/.bashrc
 alias of7="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-7/etc/bashrc"
 alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/bashrc"
 以后新开命令窗口，先输入（指定）of7或of1912即调用指定版本
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+常用环境变量
+    $FOAM_RUN  //个人目录，别名：run
+    $FOAM_SRC  //源文件，别名：src
+    $FOAM_TUTORIALS  //案例文件，别名：tut
+    env | grep "OpenFOAM"  //查看所有环境变量
+    alias | grep "FOAM"  //查看所有别名
+常见命名
+    alpha-体积分数
+    alpha.water-水的体积分数
+    p_rgh-非静压
+    U-速度
+    k-湍动能
+    epsilon-湍流耗散率
+    omega-
+    nuT*-SA模型参数
+    nut-湍流涡粘性洗漱
+    *Final-指循环中*的倒数第一次计算（一般有更多的计算量）
+    “U.*”-*表示任意字符
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+窗口命令
+常见算例运行流程
+    blockMesh  //网格
+    setFields  //初始化场
+    renumberMesh -overwrite  //优化网格编号，使对角占优
+    checkMesh  //检查网格
+    decomposePar  //区域分解
+    interFoam  //求解器
+        interFoam -postprocess system/controlDict???
+    reconstructPar  //合并区域
+    paraFoam  //可视化
+        paraFoam -builtin
+文本编辑
+    gedit name_xzy
+文本显示
+    more name-xzy
+并行计算
+    decomposePar  //区域分解
+    reconstructPar  //合并区域
+    mpirun -np 2 interFoam -parallel  //采用2核并行计算
+搜索信息
+    find -type d -name "name_xzy"  //在当前文件夹中，搜索名字中包含name_xzy的directory
+    grep -r -n "name_xzy"  //在当前文件夹中，搜索文本内容包含name_xzy的文本，并显示该行文本
+        grep -r -n "name_xzy" -A 3 -B 3  //显示前3行和后3行
+保留运算信息
+    interFoam | tee log.interFoam  //执行interFoam，并记录到log.interFoam中
+    blockMesh | tee log.blockMesh  //log.+命令名称
+代码参数化
+    length 10;
+    width 5;
+    ($length $width 0.0);  //宏-Macro
+    re #calc "$length*$width";  //inline calculation
+提取log文件中的数据，用于后处理
+    foamLog log.interFoam
+清理
+    foamCleanTutorials  //清楚计算结果文件
+        foamCleanPolyMesh  //清除网格文件
+        foamListTimes -rm  //清除时间文件
+如何确认参数选项
+    startFrom banana;  //保证“banana”不出现在src中即可，OpenFOAM会报错，提示startFrom的正确选项有哪些
+场的映射（势流结果，映射至，粘流初始场）
+    mapfields 映射源地址 -consistent -nonFunctionObjects -mapMethod cellPointInterpolate -sourceTime 0
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+数据处理
+运行时处理数据，在system/controDict中加入functionObjects，输出文件在postprocessing/function_xzy中
+    functions
+    {
+        function_xzy
+        { 
+            type forces;
+            functionObjectLibs("libforces.so");
+            enabled true;
+            log true;
+            writeControl timeStep;
+            writeInterval 1;
+            ...
+        }
+        function2_xzy
+        {
+            ...
+        }
+    }
+    如果计算已完成，想基于结果处理数据，可以
+        1 在controlDict中新增functionObjects
+          interFoam -postProcess -dict system/controlDict -noZero (/-time 500:2000 / latestTime)
+        2 将functionObjects单独写在system中
+          interFoam -postProcess -dict system/function_add -noZero (/-time 500:2000 / latestTime)
+运行后采集数据，使用sampling
+    postProcess -func sampleDict -noZero  //沿线采集数据
+        sampleDict
+    postProcess -func probesDic -noZero  //探针（按点）采集数据
+        probesDict
+场操作
+    postProcess -list  //列出工具名单
+    1 postProcess -func vorticity
+    2 rhoPimpleFoam -postProcess -func MachNo  //计算涉及结果文件不包含的参数（如粘性系数等），需要加上求解器名称
+    3 postProcess -func 'grad(U)'
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+0
+边界类型，system/blockMeshDict中的边界类型为本质类型，如"type wall"，0/U中的边界类型为数值类型，如"type fixedValue"，两者需要一一对应
+常见数值边界类型
+    基本类型
+        fixedValue
+        fixedGradient
+        zeroGradient
+        calculated
+        mixed
+        directionMixed
+    衍生类型
+        totalPressure  //处理回流，针对P
+        inletOutlet  //向外zeroGradient，向内fixedValue，针对alpha
+        pressureInletOutletVelocity  //处理回流，针对U
+        fixedFluxPressure  //考虑重力等体积力，替代zeroGradient，自行调节压力梯度，针对P
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+system/blockMeshDict
+结点ID顺序，system/blockMeshDict中的几何体(0 1 2 3 4 5 6 7)结点ID顺序为“右手向上”，几何面(0 1 2 3)结点ID顺序相邻即可
+网格信息：blockMesh的字典文件在system/blockMeshDict，网格文件在constant/polyMesh；snappyHexMesh(SHM)的字典文件在system/snappyHexMeshDict，网格文件在constant/triSurface
+    1 snappyHexMeshDict中包括：几何信息geometry，网格加密信息castellatedMeshControls，网格贴合几何体信息snapControls，几何体网格边界层信息addLayersControls，网格质量检查信息meshQualityControls
+    2 几何文件（stl）在constant/triSurface中
+    3 snappyHexMesh -overwrite执行之前，一般需要先执行blockMesh
+    4 SHM需要设置的信息，一般为：读取stl，设置特征边/面的加密等级，选择需要加边界层的表面和设置层数，其余参数默认即可
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+system/controlDict
+输出结果控制
+    1 writeControl timeStep;
+      write Interval 4;  //4个步长保存1次结果
+    2 writeControl runTime;
+      writeInterval 0.5;  //0.5秒保存1次结果
+Courant数，即CFL条件，CFL数，最好小于1，实际计算小于5也可接受
+PIMPLE系列中，可使用system/controlDict中的adjustTimeStep，自主调节时间步长（满足maxCo和maxDeltaT）
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+system/fvSchemes
+离散格式设置：1 大部分商业软件求解器版本/2 高精度版本/3 超稳定版本
+    ddtSchemes  //时间项离散
+    {
+        default CrankNicolson 0;  //2 default backward;  //3 default Euler;
+    }
+    gradSchemes  //梯度项离散
+    {
+        default cellLimited Gauss linear 0.5;  //2 default Gauss linear;  //3 default cellLimited Gauss linear 1;
+        grad(U) cellLimited Gauss linear 1;  //3 grad(U) cellLimited Gauss linear 1;
+    }
+    divSchemes  //对流项离散
+    {
+        default none;  //2 default none;  //3 default none;
+        div(phi,U) Gauss linearUpwindV grad(U);  //2 div(phi,U) Gauss linear;  //3 div(phi,U) Gauss upwind;
+        div(phi,omega) Gauss linearUpwind default;  //2 div(phi,omega) Gauss limitedlinear 1;  //3 div(phi,omega) Gauss upwind;
+        div(phi,k) Gauss linearUpwind default;  //2 Gauss limitedLinear 1;  //3 div(phi,k) Gauss upwind;
+        div((nuEff*dev(T(grad(U))))) Gauss linear;  //2 div((nuEff*dev(T(grad(U))))) Gauss linear;  //3 div((nuEff*dev(T(grad(U))))) Gauss linear;
+    }
+    laplacianSchemes  //Laplace项离散
+    {
+        default Gauss linear limited 1;  //2 default Gauss linear limited 1;  //3 default Gauss linear limited 0.5;
+    }
+    interpolationSchemes  //由体心值插值面值
+    {
+        default linear;  //2 default linear;  //3 default linear;
+    }
+    snGradSchemes  //法向梯度离散
+    {
+        default limited 1;  //2 default limited 1;  //3 default limited 0.5;
+    }
+fvScheme中处理湍流问题壁面距离
+    wallDist
+    {
+        method meshWave;
+    }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+system/fvSolution
+求解器设置
+    SIMPLE
+    {
+        consistent no;
+        nNonOrthogonalCorrectors 1;  //网格非正交校正
+    }
+    PISO
+    {
+        momentumPredictor yes;  //动量预测，对于高Re流动适用，可以得到更准确的速度
+        nCorrectors 2;  //校正
+        nNonOrthogonalCorrectors 1;  //网格非正交校正
+    }
+    PIMPLE
+    {
+        momentumPredictor yes;  //动量预测，对于高Re流动适用，可以得到更准确的速度
+        nOuterCorrectors 1;  //外层总循环，为1时退化至PISO
+        nCorrectors 2;  //校正，若CFL>1，建议nCorrectors>=3
+        nNonOrthogonalCorrectors 1;  //网格非正交校正
+    }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+system/decomposeParDict
+区域分解策略：hierachical,manual,metis,multiLevel,none,scotch,simple,structured，建议选择scotch，参数最简单，且最小化区域边界网格数目
+1G内存大概可以分解1,000,000网格
+并行计算时，需要知道计算机的实际核心数（非超线程的虚拟核心数），lscpu，实际核心数=cores per socket * sockets（自己电脑为2）
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+补充说明
+1 Doxygen，是根据OpenFOAM源代码提取的注释文件，做成的OpenFOAM说明
+2 网格质量依据：正交性orthogonality，倾斜度skewness，纵横比aspect ratio，膨胀率smoothness
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 
 //xiezhuoyu
 //mechanics_xzy@163.com
