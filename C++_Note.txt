@@ -28,6 +28,8 @@ class name_XZY
     int d;
     int min(int e, int f);
 };
+//命名空间space_xzy中，类class_xzy的函数function_xzy
+space_xzy::class_xzy::function_xzy
 
 //son_name_XZY继承于nameXZY，可以多继承
 class son_name_XZY: public nameXZY
