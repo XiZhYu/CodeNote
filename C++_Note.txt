@@ -1,24 +1,14 @@
 //C++11标准
 //基于Visual Studio Community 2017 -> Visual Studio Community 2019 -> Visual Studio Code
+//C++源文件：name.cpp或者nameC；C++头文件：name.h或者name.H
 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 //C++ ----- 类 -----数据成员
 //             +----成员函数
 //    +---- 函数
+//类中的公有成员函数也被称之为接口
 
-//类-交通工具
-    //对象1-汽车
-	    //数据
-	    //属性1-红色
-		//属性2-四个轮子
-		//...
-		//函数
-		//操作1-加速
-		//操作2-刹车
-		//...
-    //对象2-自行车
-	//...
-
-//定义类name_XZY
+//定义类name_XZY（某些对象具有一样的数据和函数）
 class name_XZY
 {
   public:
@@ -28,8 +18,6 @@ class name_XZY
     int d;
     int min(int e, int f);
 };
-//命名空间space_xzy中，类class_xzy的函数function_xzy
-space_xzy::class_xzy::function_xzy
 
 //son_name_XZY继承于nameXZY，可以多继承
 class son_name_XZY: public nameXZY
@@ -37,12 +25,35 @@ class son_name_XZY: public nameXZY
   public:
     int new_a;
 }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+//命名空间
+	namespace MySpace
+	{
+		double x = 10.2;
+	}
+//调用方法：
+//①
+    cout << MySpace::x << endl;
+//②
+    using MySpace::x;
+    cout << x << endl;
+//③
+    using namespace MySpace;
+    cout << x << endl;
+//命名空间space_xzy中，类class_xzy的函数function_xzy
+space_xzy::class_xzy::function_xzy
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 //函数模板，有问题！
 template <class type_xzy1> type_xzy2 fun_xzy(int a, int b)
 //类模板
 template <class type_xzy3> type_xzy4 class_xzy{}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 //数据类型：
 int-整数
 int*/int**/int***/...
@@ -50,8 +61,10 @@ long-长整数
 float-实数
 double-高精度的实数
 bool-逻辑值
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-//循环类型----------------------------------------------------------------
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+//循环类型
 //①for循环（基本可全部使用for）
 	for (int i = 0; i < 3; i++)
 	{
@@ -100,9 +113,10 @@ bool-逻辑值
 		cout << "Other" << endl;
 		break;
 	}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-	
-//头文件---------------------------------------------------------------------
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+//头文件
 //①输入输出
 	#include <iostream>
 	using namespace std;
@@ -163,17 +177,18 @@ bool-逻辑值
 	objOfs.open("Out.txt", ios_base::out | ios_base::binary | ios_base::trunc);//输出|二进制|删除原内容
 	objOfs << value;//将value的值输出到文本文件中
 	objOfs.close();
-
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	
-	
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 //设置报错机制
 	if (条件) 
 	{
 		cout << "错误位置 错误信息" << endl;
 		system("pause"); exit(0);
 	}
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 //&的用法
 	//取地址
 	//前方有类型则为引用，引用仅为声明，与原变量共用同一内存地址
@@ -186,7 +201,7 @@ bool-逻辑值
 	int** p_a = &a;
 	//开头的“int**”指明类型，*可无限个
 //简单点说，&取址时得到地址位置，*得到地址位置所存的数据
-
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 	
 /*******************************************************************************
 静态库lib制作（保护代码）
@@ -259,19 +274,63 @@ Eigen库的使用，矩阵运算
 	关键词：inline，不超过5行
 *******************************************************************************/
 
-//命名空间
-	namespace MySpace
-	{
-		double x = 10.2;
-	}
-//调用方法：
-//①
-	cout << MySpace::x << endl;
-//②
-	using MySpace::x;cout << x << endl;
-//③
-	using namespace MySpace;cout << x << endl;
-
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+//C++文件结构（参考于OpenFOAM），编译器wmake
+    Make
+        files  //待编译文件的名称，编译后生成文件（exe、dll/so）的路径
+        options  //需要调用库的路径
+    class_xzy.H  //头文件
+    class_xzy.C  //源程序
+    name_xzy.C  //主程序
+//files示例
+    name_xzy.C
+    EXE = path_xzy/name_xzy  //编译为exe程序
+    //LIB = path_xzy/name_xzy  //编译为so库
+//options示例
+    EXE_INC = -I../path_xzy  //附加库的路径，path_xzy文件夹中有lib_name_xzy.H
+    //EXE_LIBS = -L../path_xzy -lmyLib  //so库
+//class_xzy.H示例
+    class class_xzy  //类
+    {
+    private:  //私有数据，仅本类的函数可调用
+        int a;
+        int b;
+        int c;
+    public:  //公共函数
+        int get_a(int a_);
+        int get_b(int b_);
+        int add();
+    };
+//class_xzy.C示例
+    void class_xzy::get_a(int a_)
+    {
+        a = a_;
+    }
+    void class_xzy::get_b(int b_)
+    {
+        b = b_;
+    }
+    int class_xzy::add()
+    {
+        c = a + b;
+        return c;
+    }
+//name_xzy.C示例
+    #include <iostream>
+    #include "class_xzy.H"  //自定义类
+    #include "lib_name_xzy.H"  //其他库
+    using namespace std;
+    int main()
+    {
+        class_xzy object_xzy;
+        object_xzy.get_a(3);
+        object_xzy.get_b(4);
+        cout << object_xzy.add << endl;
+        cout << "hello xzy" << endl;
+        return 0;
+    }
+//事实上，开心的话，完全可以把程序写到一个文件内，但是考虑到规则性，习惯上：一个H文件和一个C文件对应一个类，H文件为类声明，C文件为类实现，便于封装
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
 //xiezhuoyu
