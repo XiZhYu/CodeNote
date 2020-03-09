@@ -47,10 +47,25 @@ space_xzy::class_xzy::function_xzy
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-//函数模板，有问题！
-template <class type_xzy1> type_xzy2 fun_xzy(int a, int b)
-//类模板
-template <class type_xzy3> type_xzy4 class_xzy{}
+//模板：一般性，无int、float等类型限制
+//函数模板（函数定义的扩展）
+    template <class T> void/int/... fun_xzy(T a, T b)
+    { ... }
+//当调用fun_xzy(3,4)时，T就被替代为int
+//class可用关键词typename替代
+
+//类模板（类定义的扩展）
+    template <class T,class W> class class_xzy
+    {
+    private:
+        T a;
+        W b;
+    public:
+        T get_a();
+        W get_b();
+    };
+//创建对象
+    class_xzy<int,double> object_xzy;  //int传给T，double传给W
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -329,7 +344,7 @@ Eigen库的使用，矩阵运算
         cout << "hello xzy" << endl;
         return 0;
     }
-//事实上，开心的话，完全可以把程序写到一个文件内，但是考虑到规则性，习惯上：一个H文件和一个C文件对应一个类，H文件为类声明，C文件为类实现，便于封装
+//事实上，开心的话，完全可以把程序写到一个文件内，但是考虑到归纳、整理、搜索，习惯上：一个H文件和一个C文件对应一个类，H文件为类声明，C文件为类实现，便于封装
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
