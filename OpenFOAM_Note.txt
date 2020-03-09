@@ -260,6 +260,7 @@ system/decomposeParDict
 补充说明
 1 Doxygen，是根据OpenFOAM源代码提取的注释文件，做成的OpenFOAM说明
 2 网格质量依据：正交性orthogonality，倾斜度skewness，纵横比aspect ratio，膨胀率smoothness
+3 MRF-Multiple Reference Frame多重参考系,LTS-Local Time Step
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
