@@ -1,0 +1,65 @@
+Patran2011
+有限元前、后处理软件，这里主要用于THAFTS分析用的有限元网格模型
+
+建模前，注意问题要求的坐标系
+    THAFTS：干网格坐标系原点在船尾基线处，x轴指向船首，z轴向上；湿网格坐标系与干网格坐标系一致
+        导入后，注意坐标系是否正确
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+中键-旋转
+shift+中键-平移
+ctrl+中键-缩放
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+几何建模Geometry
+    create->coord->Euler，新建坐标系
+    create->curve，画线
+    transform->curve->rotate，阵列
+    edit->curve->break，打断线
+    create->surface
+        edge/curve，按边生成面
+        extract，从solid提取面
+    edit->solid
+        break，将solid分成多个子solid
+        boolean，布尔操作
+建议：先思考大致过程，后期不要出现无法实现的操作
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+网格划分Meshing
+    create->meshSeed，布置种子
+        两个面交界的边，需要根据两个面来布置种子
+    create->mesh->surface，按面划分网格（作为板壳单元）
+        网格出来后，注意观察，如果有交界边的网格，其交界边必须有结点，否则分析时，结构会脱开
+        如何使其有结点：根据交界边来做面
+        总而言之：不考虑工作量的话，最好根据小面来mesh，而不是大面
+    equivalence，调节容差，去除重复结点（否则可能无法进行模态分析，或者结构分析时，结构可能脱开）
+    renumber->node,renumber->element，重新编号
+    verify->element->normals，查看单元法向（这里也可方便地选择参考法向）
+    modify->element->reverse，修改单元法向
+建议：THAFTS里面基本用的是二维网格，几何建模时，建议先建立solid，根据solid提取surface，surface不要重复，surface要尽可能细分，保证两个区域之间的交界线的种子能一致，种子可以先按照距离给整体布置，再进行局部的调整，再mesh，mesh之后要将相隔很近的结点合并，即equivalence
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+材料Properties
+    isotropic
+        create->isotropic->manualInput
+        材料命名
+        inputProperties：弹性模量、泊松比、密度
+    2DProperties
+        create->2D->shell
+        材料集合（网格）命名
+        inputProperties：材料名、shell厚度
+        selectApplicationRegion：选择集合（网格）
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+分析Analysis
+    Analyze->selectedGroup->analysisDeck
+    selectGroup，默认当前
+    translationParameters
+        cardFormat:small（错误则可能无法进行模态分析）
+    solutionType
+        normalModes，进行模态分析
+= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
