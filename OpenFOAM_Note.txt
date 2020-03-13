@@ -55,7 +55,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
 常见命名
     alpha-体积分数
     alpha.water-水的体积分数
-    p_rgh-非静压
+    p_rgh-非静压，p_rgh=p-rho*g*h
     U-速度
     k-湍动能
     epsilon-湍流耗散率
@@ -64,6 +64,13 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     nut-湍流涡粘性洗漱
     *Final-指循环中*的倒数第一次计算（一般有更多的计算量）
     “U.*”-*表示任意字符
+    volScalarField-体标量场
+    volVectirField-体矢量场
+    fvScalarMatrix-标量矩阵
+    autoPtr-OpenFOAM特有的智能指针
+其他
+    sqr-平方
+    sqrt-开平方
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -261,6 +268,7 @@ system/decomposeParDict
 1 Doxygen，是根据OpenFOAM源代码提取的注释文件，做成的OpenFOAM说明
 2 网格质量依据：正交性orthogonality，倾斜度skewness，纵横比aspect ratio，膨胀率smoothness
 3 MRF-Multiple Reference Frame多重参考系,LTS-Local Time Step
+4 OpenFOAM中fvCFD.H文件是一个非常大的框架，包含了大部分的基本的类型
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
