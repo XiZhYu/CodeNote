@@ -23,22 +23,23 @@ ctrl+中键-缩放
     edit->solid
         break，将solid分成多个子solid
         boolean，布尔操作
-建议：先思考大致过程，后期不要出现无法实现的操作
+建议：先思考大致过程，不要出现后期无法实现的操作
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 网格划分Meshing
-    create->meshSeed，布置种子
+    create->meshSeed，布置种子（按number或length）
         两个面交界的边，需要根据两个面来布置种子
     create->mesh->surface，按面划分网格（作为板壳单元）
-        网格出来后，注意观察，如果有交界边的网格，其交界边必须有结点，否则分析时，结构会脱开
+        要在surface上进行选择，不要选solidSurface（否则会重复网格）！！
+        网格出来后，注意观察，如果有交界边的网格，其交界边必须有共同结点，否则分析时，结构会脱开
         如何使其有结点：根据交界边来做面
         总而言之：不考虑工作量的话，最好根据小面来mesh，而不是大面
-    equivalence，调节容差，去除重复结点（否则可能无法进行模态分析，或者结构分析时，结构可能脱开）
+    equivalence，调节tolerance，合并（去除）重复结点（否则可能无法进行模态分析，或者结构分析时，结构可能脱开）
     renumber->node,renumber->element，重新编号
-    verify->element->normals，查看单元法向（这里也可方便地选择参考法向）
-    modify->element->reverse，修改单元法向
-建议：THAFTS里面基本用的是二维网格，几何建模时，建议先建立solid，根据solid提取surface，surface不要重复，surface要尽可能细分，保证两个区域之间的交界线的种子能一致，种子可以先按照距离给整体布置，再进行局部的调整，再mesh，mesh之后要将相隔很近的结点合并，即equivalence
+    verify->element->normals，查看单元法向（这里也可方便地选择参考法向，部分网格方向不对时用这个）
+    modify->element->reverse，修改单元法向（所有方向都不对时用这个）
+建议：THAFTS里面基本用的是二维网格，几何建模时，建议先建立solid，根据solid提取surface，surface不要重复，surface要尽可能细分，保证两个区域之间的交界线的种子能一致，种子可以先按照距离给整体布置，再进行局部的调整，再mesh，mesh之后要将相隔很近的结点合并，即equivalence。绝对不要再同一个空间位置，划分多次网格
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -51,7 +52,7 @@ ctrl+中键-缩放
         create->2D->shell
         材料集合（网格）命名
         inputProperties：材料名、shell厚度
-        selectApplicationRegion：选择集合（网格）
+        selectApplicationRegion：选择区域/网格
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
