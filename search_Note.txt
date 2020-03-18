@@ -50,6 +50,7 @@ ScienceDirect
 网页检索
   Google学术
     VPN、HOSTS、谷歌访问助手
+    墙外的网站大部分可以找到镜像来代替
 	可ENDNOTE导出
 	”sfx“
   微软学术
