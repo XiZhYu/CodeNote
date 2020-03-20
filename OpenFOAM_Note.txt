@@ -86,6 +86,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     reconstructPar  //合并区域
     paraFoam  //可视化
         paraFoam -builtin
+        paraFoam -builtin -case fileName  //可视化指定目录下CASE
 文本编辑
     gedit name_xzy
 文本显示
@@ -116,6 +117,8 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     startFrom banana;  //保证“banana”不出现在src中即可，OpenFOAM会报错，提示startFrom的正确选项有哪些
 场的映射（势流结果，映射至，粘流初始场）
     mapfields 映射源地址 -consistent -nonFunctionObjects -mapMethod cellPointInterpolate -sourceTime 0
+os-输出到文件
+Info-输出到终端
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

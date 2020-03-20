@@ -39,6 +39,10 @@ cp -r File1 File2  复制File1到File2
 find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
 touch test.txt   新建文件
 gedit filename 创建并编辑filename文件
+  code filename  采用vscode
+  将默认编辑器修改为scode
+    xdg-mime default code.desktop text/plain
+    sudo update-alternatives --set editor /usr/bin/code
 unset $FOAM_RUN  清除某一个环境变量
 
 
@@ -64,12 +68,13 @@ python程序
   python3 CASE.py
 
 
-apt-get update 更新软件
+apt-get update 更新软件，安装软件前一定要更新
   /etc/apt/sources.list  将源修改为USTC源
 apt-get install paraview 安装软件paraview
 apt-get upgrade paraview  升级软件paraview
 apt-get autoremove paraview 卸载软件paraview
 apt-get remove --purge paraview 卸载软件并清除配置文件
+apt-get autoremove  清理不需要的软件包
 
 dpkg -l  查看已安装软件包
 python3 xzy.py | tee recorder.log  记录屏幕输出至log文件
