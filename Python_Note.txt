@@ -16,6 +16,29 @@
 #	μ mu 			ω, Ω omega
 #希腊字母=============================================================
 
+#计算包= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+#cmd方式安装
+  python -m pip list  #查看已安装包
+  python -m pip install matplotlib  #安装matplotlib包
+#常见包
+  numpy-矩阵计算包
+  math-数学函数包
+  matplotlib-作图包
+  scipy-数值方法包
+#导入包
+  import numpy  #导入矩阵计算包
+  from numpy import linspace  #numpy包导入linspace函数
+  import math  #导入数学计算包
+    #数学函数：ceil  exp  fabs  floor  log  log10  max  min  pow  round  sqrt
+    #三角函数：sin  cos  tan  asin  acos  atan
+    #常用数值：math.pi  math.e
+  import random  #导入随机数学计算包
+    #随机数函数：random()  seed()
+#画图-开头固定格式
+  import matplotlib.pyplot as plt  #导入绘图包，给别名
+  import numpy as np  #导入包，给别名
+#计算包= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 #语法=====================================================================
 #参考：https://www.runoob.com/python3
 #缩进的空格数是可变的，但是同一个代码块的语句必须包含相同的缩进空格数
@@ -24,16 +47,6 @@
 #''和""使用完全相同
 #索引值以 0 为开始值，-1 为从末尾的开始位置
 #转义字符：\n-换行  \t-横向制表符  \r-回车
-
-#导入包
-import numpy  #导入矩阵计算包
-from numpy import linspace  #numpy包导入linspace函数
-import math  #导入数学计算包
-#数学函数：ceil  exp  fabs  floor  log  log10  max  min  pow  round  sqrt
-#三角函数：sin  cos  tan  asin  acos  atan
-#常用数值：math.pi  math.e
-import random  #导入随机数学计算包
-#随机数函数：random()  seed()
 
 #数据类型：数字number、字符串string、列表list、元组tuple、集合set、字典dictionary
 #  +  -  *  /  //  %  **
@@ -114,10 +127,6 @@ print(np.argmax(c))  #最值ID
 print(np.vstack((c,c)))  #纵向扩展
 print(np.hstack((c,c)))  #横向扩展
 #语法=====================================================================
-
-#画图-开头固定格式
-import matplotlib.pyplot as plt  #导入绘图包，给别名
-import numpy as np  #导入包，给别名
 
 #二维数据表达=============================================================
 #数据最好不依赖颜色区分
