@@ -32,7 +32,7 @@ tree  查看文件的树状结构（sudo apt-get install tree）
 mkdir dir1 创建一个叫做 'dir1' 的目录
 rm -f file1 删除一个叫做 'file1' 的文件
   rm -f CASE1_*  统配符*适用
-rm -rf file1 删除一个叫做 'file1' 的文件夹
+rm -rf file1 删除一个叫做 'file1' 的文件夹，谨慎使用！！！
 mv dir1 new_dir 移动 一个目录（等效于重命名）
 cp -r File1 File2  复制File1到File2
   cp file.zip ./ 复制file文件到当前目录
