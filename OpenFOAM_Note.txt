@@ -108,7 +108,14 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     ($length $width 0.0);  //宏-Macro
     re #calc "$length*$width";  //inline calculation
 提取log文件中的数据，用于后处理
-    foamLog log.interFoam
+    foamLog log.interFoam  //该命令只能提取固定的变量
+    grep xzy_name1 log.interFoam | awk -F "xzy_name2" '{print $xzy_i1}'|awk -F "xzy_name3" '{print $xzy_i2}' >time
+    //针对log.interFoam中含有xzy_name1的每一行，按xzy_name2分成若干列，取第xzy_i1列，得到文本，再按xzy_name3分成若干列，取第xzy_i2列，得到文本，可以重复
+    //应用：提取浮体重心位移
+        grep "Centre of mass" LOG.overInterDyMFoam | awk -F "(" '{print $2}' | awk -F ")" '{print $1}' > displacement  //提取位移
+        grep "^Time =" LOG.overInterDyMFoam | awk -F "=" '{print $2}' >time  //提取时间
+        paste time displacement | awk '{print $1"\t"$2"\t"$3"\t"$4}' >timeDisplacement  //将time和displacement合并，并取出1、3、4、5列
+            paste time displacement  //更直接
 清理
     foamCleanTutorials  //清楚计算结果文件
         foamCleanPolyMesh  //清除网格文件
