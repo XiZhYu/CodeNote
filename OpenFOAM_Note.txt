@@ -112,10 +112,10 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     grep xzy_name1 log.interFoam | awk -F "xzy_name2" '{print $xzy_i1}'|awk -F "xzy_name3" '{print $xzy_i2}' >time
     //针对log.interFoam中含有xzy_name1的每一行，按xzy_name2分成若干列，取第xzy_i1列，得到文本，再按xzy_name3分成若干列，取第xzy_i2列，得到文本，可以重复
     //应用：提取浮体重心位移
-        grep "Centre of mass" LOG.overInterDyMFoam | awk -F "(" '{print $2}' | awk -F ")" '{print $1}' > displacement  //提取位移
-        grep "^Time =" LOG.overInterDyMFoam | awk -F "=" '{print $2}' >time  //提取时间
+        grep "Centre of mass" log.overInterDyMFoam | awk -F "(" '{print $2}' | awk -F ")" '{print $1}' > displacement  //提取位移
+        grep "^Time =" log.overInterDyMFoam | awk -F "=" '{print $2}' >time  //提取时间
         paste time displacement | awk '{print $1"\t"$2"\t"$3"\t"$4}' >timeDisplacement  //将time和displacement合并，并取出1、3、4、5列
-            paste time displacement  //更直接
+            paste time displacement >timeDisplacement  //更直接
 清理
     foamCleanTutorials  //清楚计算结果文件
         foamCleanPolyMesh  //清除网格文件
@@ -271,6 +271,14 @@ system/decomposeParDict
 区域分解策略：hierachical,manual,metis,multiLevel,none,scotch,simple,structured，建议选择scotch，参数最简单，且最小化区域边界网格数目
 1G内存大概可以分解1,000,000网格
 并行计算时，需要知道计算机的实际核心数（非超线程的虚拟核心数），lscpu，实际核心数=cores per socket * sockets（自己电脑为2）
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+paraFoam  //可视化
+    paraFoam -builtin
+    paraFoam -builtin -case fileName  //可视化指定目录下CASE
+//如果标注显示失常，应当缩小到一定程度再回到原视角，就ok
+//overset的后处理：结合clip或slice，和threshold，显示cellTypes场，选1，可以去掉洞单元。
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
