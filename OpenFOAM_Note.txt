@@ -116,6 +116,10 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
         grep "^Time =" log.overInterDyMFoam | awk -F "=" '{print $2}' >time  //提取时间
         paste time displacement | awk '{print $1"\t"$2"\t"$3"\t"$4}' >timeDisplacement  //将time和displacement合并，并取出1、3、4、5列
             paste time displacement >timeDisplacement  //更直接
+    //应用：提取浮体方向
+        grep "Orientation" log.overInterDyMFoam | awk -F "(" '{print $2}' | awk -F ")" '{print $1}' > orientation  //提取位移
+        grep "^Time =" log.overInterDyMFoam | awk -F "=" '{print $2}' >time  //提取时间
+        paste time orientation >timeOrientation  //更直接
 清理
     foamCleanTutorials  //清楚计算结果文件
         foamCleanPolyMesh  //清除网格文件
