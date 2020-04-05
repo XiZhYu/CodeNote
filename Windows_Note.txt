@@ -1,5 +1,7 @@
-
 windows
+
+win8.1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+快捷键
 1.win + 
 	方向键（->,<-...）---往指定方向缩屏
 	L---锁屏
@@ -8,16 +10,86 @@ windows
 	S---搜索
 2.Alt+Tab---换屏
 
-DOS常用命令---------------------------------------------------------------
+DOS(direct operate system)常用命令
 	help-查看帮助最直接
 	cd-change directory显示当前目录名称或将其更改
+		要进入其他盘，需要先：“E:”
 	cls-清除屏幕
 	copy-复制文件
 	del-删除文件（没事别用）
-	dir-显示目录中的文件及其子文件夹	
+	dir-显示目录中的文件及其子文件夹
+
+win+X->U->U  关机
+win+X->U->S  睡眠
+win8.1 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
-OFFICE 2013-WORD
+常用软件 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+浏览器
+	Firefox-开源，插件丰富，账号登陆，可同步书签和插件等设置
+	chrome-好看
+下载器
+	迅雷-自带迅雷播放组件，省了影音播放器
+	you-get-开源，依赖python环境，用于下载浏览器可以播放的视频
+云
+	百度云-备份文件，同步文件
+office
+	word
+	excel
+	powerPoit
+	visio-作图，支持位图和矢量图
+文档处理
+	Latex-免费，不太友好
+文献资料管理软件
+	Zotero-开源，支持笔记，支持网上同步，搭配FireFox使用，还行
+	Endnote-好看，有时候导入PDF莫名崩溃
+编程IDE
+	编辑器
+		visual studio code-免费，跨平台，插件丰富，配置一下可以作为PYTHON、C++的IDE（集成开发环境）
+		NotePad++-开源，简单好用
+	编译器
+		MinGW-开源，可编译C、C++、Fortran等
+阅读器
+	Foixt-免费，PDF格式
+	WinDjView-免费，奇葩的格式
+	CajViewer-知网文档
+翻译
+	lingoes-免费，自主搭配词典
+压缩工具
+	7-zip-开源
+文档公式编辑
+	MathType-精简版免费
+三维建模
+	FreeCAD-开源，界面质朴，时有bug
+	Onshape-在线，网络不一定稳定
+修图
+	在线PS-国外的网络不一定好，搜到哪个用哪个，注意隐私
+	GIMP-开源，基本可替代PS
+作图
+	Inkscape-开源，但是输入公式比较麻烦，之前没搞定
+图像数据提取
+	WebPlotDigitizer-开源，图像数字化（盗图专用）
+PDF编辑
+	https://www.pdf2go.com/
+格式转换
+	https://ebook.online-convert.com/
+	https://cloudconvert.com/
+代码管理
+	git-本地
+	github-远程
+CAE软件
+	ANSYS-学生版免费
+文件搜索
+	everything-很小很快，但是文件本身分类恰当的话，百年一用
+计算与可视化
+	Octave-免费，基本可以替代matlab，界面丑，有网页在线版
+	python-搭配matlibplot等作图库，可以完全取代matlab
+	paraview-开源，强大的三维可视化工具
+常用软件 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+OFFICE = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+版本：2013->2016
+word
 1.视图-标尺/导航窗口
 	开始-显示编辑标记
 2.连续三个符号回车：如－－－，＝＝＝，＃＃＃……，可以自动生成分隔线
@@ -80,7 +152,8 @@ OFFICE 2013-WORD
   视图-草稿-引用-显示备注
 16.word公式编辑器字体，改为普通文本，再进行操作
 17.word公式编辑器下标ij显示不好看，应该先改为times斜字体，再右键>字体，提升0.5磅。
-  
-  
+OFFICE = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
 mechanics_xzy@163.com
 xiezhuoyu
