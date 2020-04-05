@@ -1,14 +1,25 @@
 Linux
-基于Ubuntu
+基于Ubuntu 18.04.4LTS
 
 终端快捷键
 Ctrl+Alt+t
 
+文件= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+/etc 系统管理和配置文件
+/home 用户主目录的基点
+/lib 标准程序设计库，又叫动态链接共享库
+/tmp 公用的临时文件存储点
+/root 系统管理员的主目录
+/usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
+/src 源代码
+/dev 目录存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备
+文件= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+常见命令= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 帮助命令
 man cd		详细
 cd --help	简明
 info cd		完整
-
 
 date 显示系统日期
 shutdown -h now 关闭系统(1) 
@@ -16,10 +27,8 @@ shutdown -h hours:minutes & 按预定时间关闭系
 shutdown -c 取消按预定时间关闭系统
 shutdown -r now 重启(1) 
 
-
 cat file1 从第一个字节开始正向查看文件的内容 
 head -2 file1 查看一个文件的前两行
-
 
 cd /home 进入 '/ home' 目录
 cd .. 返回上一级目录 
@@ -29,44 +38,28 @@ pwd 显示工作路径
 ls 查看目录中的文件
   l  查看，区分文件与文件夹
 tree  查看文件的树状结构（sudo apt-get install tree）
+
 mkdir dir1 创建一个叫做 'dir1' 的目录
 rm -f file1 删除一个叫做 'file1' 的文件
   rm -f CASE1_*  统配符*适用
 rm -rf file1 删除一个叫做 'file1' 的文件夹，谨慎使用！！！
+  rm -rf file1 -i  删除前询问是否删除，一定要加i
 mv dir1 new_dir 移动 一个目录（等效于重命名）
 cp -r File1 File2  复制File1到File2
   cp file.zip ./ 复制file文件到当前目录
-find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
 touch test.txt   新建文件
 gedit filename 创建并编辑filename文件
-  code filename  采用vscode
+code filename  采用vscode编辑文件
   将默认编辑器修改为scode
     xdg-mime default code.desktop text/plain
     sudo update-alternatives --set editor /usr/bin/code
-unset $FOAM_RUN  清除某一个环境变量
 
+find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
+df -h  查看磁盘存储信息
+dpkg -l  查看已安装软件包
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
 unzip file1.zip 解压一个!zip格式压缩包
-
-
-/etc 系统管理和配置文件
-/home 用户主目录的基点
-/lib 标准程序设计库，又叫动态链接共享库
-/tmp 公用的临时文件存储点
-/root 系统管理员的主目录
-/usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
-/src 源代码
-/dev 目录存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备
-
-
-C++程序(Hello.cc)运行，生成可执行文件(Hello)
-  g++ Hello.cc -o Hello
-运行可执行文件
-  ./Hello
-python程序
-  python3 CASE.py
-
 
 apt-get update 更新软件，安装软件前一定要更新
   /etc/apt/sources.list  将源修改为USTC源
@@ -76,14 +69,26 @@ apt-get autoremove paraview 卸载软件paraview
 apt-get remove --purge paraview 卸载软件并清除配置文件
 apt-get autoremove  清理不需要的软件包
 
-dpkg -l  查看已安装软件包
+unset $FOAM_RUN  清除某一个环境变量
+
 python3 xzy.py | tee recorder.log  记录屏幕输出至log文件
+常见命令= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+其他操作= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+C++程序(Hello.cc)运行，生成可执行文件(Hello)
+  g++ Hello.cc -o Hello
+运行可执行文件
+  ./Hello
+python程序
+  python3 CASE.py
 
 关闭笔记本盖子，不采取睡眠措施（即不会中断计算）
   sudo su
   echo 'HandleLidSwitch=ignore' | tee --append /etc/systemd/logind.conf
   echo 'HandleLidSwitchDocked=ignore' | tee --append /etc/systemd/logind.conf
   sudo service systemd-logind restart
+其他操作= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
 
 //mechanics_xzy@163.com
 //xiezhuoyu
