@@ -68,6 +68,8 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     volVectirField-体矢量场
     fvScalarMatrix-标量矩阵
     autoPtr-OpenFOAM特有的智能指针
+    phi-通量
+    Phi-速度势
 其他
     sqr-平方
     sqrt-开平方
