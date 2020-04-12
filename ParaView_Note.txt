@@ -1,0 +1,24 @@
+ParaView
+开源，支持windows和linux，数据分析和可视化软件
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+滤镜filter
+右键对象，创建滤镜
+    contour-云图
+    clip-切出一整块
+    slice-片
+    threshold-按场值提取某一范围
+    stream tracer-提取流线图
+    ExtractBlock-提取某一命名区域，如提取浮体做可视化处理
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+配合OpenFOAM使用
+    paraFoam -builtin
+    paraFoam -builtin -case fileName  //可视化指定目录下CASE
+overset的后处理：结合clip或slice，和threshold，显示cellTypes场，选1，可以去掉洞单元。
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+//常用技巧
+1.Properties中的小齿轮为高级设置开关
+2.如果标注显示失常，应当缩小到一定程度再回到原视角，就ok
