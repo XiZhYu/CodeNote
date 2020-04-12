@@ -279,13 +279,6 @@ system/decomposeParDict
 并行计算时，需要知道计算机的实际核心数（非超线程的虚拟核心数），lscpu，实际核心数=cores per socket * sockets（自己电脑为2）
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
-// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
-paraFoam  //可视化
-    paraFoam -builtin
-    paraFoam -builtin -case fileName  //可视化指定目录下CASE
-//如果标注显示失常，应当缩小到一定程度再回到原视角，就ok
-//overset的后处理：结合clip或slice，和threshold，显示cellTypes场，选1，可以去掉洞单元。
-// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 补充说明
