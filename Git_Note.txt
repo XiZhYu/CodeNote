@@ -24,6 +24,7 @@ Git Bash命令--------------------------------------------------------------
     cd ../yourWorkSpace
 	方式一：将远程仓库克隆（下载）至本地，同时会自动关联本地与远程
 		[a] git clone https://...    匿名只读，自动创建远程连接名：origin
+			git clone到另外一台电脑上，可正常add、commit、push
 		[b] git clone ssh://user@host...    读写
 		[c] git clone /path/to/repository
 	方式二：创建新的git本地仓库，再链接至远程仓库
@@ -65,6 +66,7 @@ Git Bash命令--------------------------------------------------------------
 	git fetch    拉取仓库中所有的分支
 	git merge    并入本地分支
 	git config -l  列出当前仓库的配置信息
+	git pull
 
 
 
