@@ -13,6 +13,7 @@ Ctrl+Alt+t
 /usr 最庞大的目录，要用到的应用程序和文件几乎都在这个目录
 /src 源代码
 /dev 目录存放了设备文件，即设备驱动程序，用户通过这些文件访问外部设备
+/opt 软件
 文件= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 常见命令= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -60,6 +61,7 @@ dpkg -l  查看已安装软件包
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
 unzip file1.zip 解压一个!zip格式压缩包
+tar -xf name_xzy.tar.bz2 -C /opt/  解压tar.bz2文件至opt文件夹
 
 apt-get update 更新软件，安装软件前一定要更新
   /etc/apt/sources.list  将源修改为USTC源
@@ -72,6 +74,8 @@ apt-get autoremove  清理不需要的软件包
 unset $FOAM_RUN  清除某一个环境变量
 
 python3 xzy.py | tee recorder.log  记录屏幕输出至log文件
+
+sudo chmod -R 700 OpenFOAM/  给拥有者OpenFOAM目录读、写、可执行权，-R表示子目录也包括
 常见命令= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 其他操作= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -87,6 +91,11 @@ python程序
   echo 'HandleLidSwitch=ignore' | tee --append /etc/systemd/logind.conf
   echo 'HandleLidSwitchDocked=ignore' | tee --append /etc/systemd/logind.conf
   sudo service systemd-logind restart
+
+下载
+  weget -0 name_xzy.zip https://...zip  命名-链接
+  weget -c -0 name_xzy.zip https://...zip  断点续传
+  weget -0 name_xzy.zip --tries=20 https://...zip  若下载失败，重复20次
 其他操作= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 

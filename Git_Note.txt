@@ -44,6 +44,7 @@ Git Bash命令--------------------------------------------------------------
 		  git push name_xzy master/branch	push到master或branch
 
 两个本地仓库共同更新一个远程仓库
+	git clone https://... fileName_xzy
 	git remote -v  查看远程仓库信息
 	git pull  将远程仓库的更新pull到本地仓库
 	git push origin mstaer  将本地仓库的更新push到远端仓库
@@ -69,6 +70,11 @@ Git Bash命令--------------------------------------------------------------
 	git pull
 
 
+常用步骤
+	git add *
+	git commit -m "modify from A"
+	git pull
+	git push orgin master
 
 xiezhuoyu
 mechanics_xzy@163.com
