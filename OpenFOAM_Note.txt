@@ -97,6 +97,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     decomposePar  //区域分解
     reconstructPar  //合并区域
     mpirun -np 2 interFoam -parallel  //采用2核并行计算
+    mpirun -np 4 snappyHexMesh -parallel -overwrite  //网格并行
 搜索信息
     find -type d -name "name_xzy"  //在当前文件夹中，搜索名字中包含name_xzy的directory
     grep -r -n "name_xzy"  //在当前文件夹中，搜索文本内容包含name_xzy的文本，并显示该行文本
