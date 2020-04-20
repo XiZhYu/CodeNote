@@ -96,7 +96,19 @@ python程序
   weget -0 name_xzy.zip https://...zip  命名-链接
   weget -c -0 name_xzy.zip https://...zip  断点续传
   weget -0 name_xzy.zip --tries=20 https://...zip  若下载失败，重复20次
+
+设置内存swap空间
+  free -m  //查看当前系统的swap大小
+  mkdir /home/xiezhuoyu/swapfile  //创建swap文件
+  cd /home/xiezhuoyu/swapfile
+  sudo dd if=/dev/zero of=swap bs=1G count=16  //创建一个大小为61G的，名为swap的空文件
+  sudo mkswap -f swap  //将生成的文件转换成swap类型的文件
+  sudo swapon swap  //激活swap文件
+  //sudo swapoff swap  //卸载swap文件
+  /home/xiezhuoyu/swapfile/swap none swap defaults 0 0  //写入/etc/fstab文件中，开机自动加载
 其他操作= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+系统设置为英文，方便debug
 
 
 //mechanics_xzy@163.com
