@@ -97,7 +97,10 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     decomposePar  //区域分解
     reconstructPar  //合并区域
     mpirun -np 2 interFoam -parallel  //采用2核并行计算
+        reconstructPar
     mpirun -np 4 snappyHexMesh -parallel -overwrite  //网格并行
+        reconstructParMesh -constant
+    mpirun -np 4 checkMesh -parallel -latesttime  //并行检查
 搜索信息
     find -type d -name "name_xzy"  //在当前文件夹中，搜索名字中包含name_xzy的directory
     grep -r -n "name_xzy"  //在当前文件夹中，搜索文本内容包含name_xzy的文本，并显示该行文本
@@ -198,6 +201,10 @@ system/blockMeshDict
     2 几何文件（stl）在constant/triSurface中
     3 snappyHexMesh -overwrite执行之前，一般需要先执行blockMesh
     4 SHM需要设置的信息，一般为：读取stl，设置特征边/面的加密等级，选择需要加边界层的表面和设置层数，其余参数默认即可
+
+针对浮体不同区域进行加密
+    将stl手动拆分成多个区域，在stl中加regiones
+    这样会导致后面的浮体边界也会分区，只能再改边界
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
