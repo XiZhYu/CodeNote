@@ -127,6 +127,8 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     foamCleanTutorials  //清楚计算结果文件
         foamCleanPolyMesh  //清除网格文件
         foamListTimes -rm  //清除时间文件
+复制算例(0\constant\system)
+    foamCloneCase A B
 如何确认参数选项
     startFrom banana;  //保证“banana”不出现在src中即可，OpenFOAM会报错，提示startFrom的正确选项有哪些
 场的映射（势流结果，映射至，粘流初始场）
@@ -170,6 +172,16 @@ Info-输出到终端
     1 postProcess -func vorticity
     2 rhoPimpleFoam -postProcess -func MachNo  //计算涉及结果文件不包含的参数（如粘性系数等），需要加上求解器名称
     3 postProcess -func 'grad(U)'
+查看后处理命令
+    postProcess -list
+监控残差
+    find $FOAM_ETC -name residuals  //找到残差设置文本
+    cp path/residuals ./system/  //复制到算例文件中，并修改
+    functions
+    {
+        #includeFunc residuals
+    }
+    foamMonitor -l postProcessing/residuals/0/residuals.dat  //作图，在求解时运行！
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -188,6 +200,10 @@ Info-输出到终端
         inletOutlet  //向外zeroGradient，向内fixedValue，针对alpha
         pressureInletOutletVelocity  //处理回流，针对U
         fixedFluxPressure  //考虑重力等体积力，替代zeroGradient，自行调节压力梯度，针对P
+列举可用的边界条件类型
+    overInterDyMFoam -listScalarBCs -listVectorBCs
+查看壁面函数类型
+    find $FOAM SRC/TurbulenceModels -name wallFunctions
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

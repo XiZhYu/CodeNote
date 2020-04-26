@@ -4,7 +4,7 @@ ParaView
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 滤镜filter
 右键对象，创建滤镜
-    contour-云图
+    contour-云图（等值面）
     clip-切出一整块
     slice-片
     threshold-按场值提取某一范围
