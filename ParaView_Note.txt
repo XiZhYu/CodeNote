@@ -10,6 +10,7 @@ ParaView
     threshold-按场值提取某一范围
     stream tracer-提取流线图
     ExtractBlock-提取某一命名区域，如提取浮体做可视化处理
+    ExtractCellsByRegion-提取完整的单元
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -17,6 +18,8 @@ ParaView
     paraFoam -builtin
     paraFoam -builtin -case fileName  //可视化指定目录下CASE
 overset的后处理：结合clip或slice，和threshold，显示cellTypes场，选1，可以去掉洞单元。
+提取自由液面
+    contour滤镜，按alpha做云图，按高度Cz着色
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 //常用技巧
