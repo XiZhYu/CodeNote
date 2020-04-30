@@ -57,6 +57,7 @@ code filename  采用vscode编辑文件
 
 find / -name file1 从 '/' 开始进入根文件系统搜索文件和目录
 df -h  查看磁盘存储信息
+du -d 1  //当前目录的文件大小
 dpkg -l  查看已安装软件包
 
 zip -r file1.zip file1 file2 dir1 将几个文件和目录同时压缩成一个zip格式的压缩包 
