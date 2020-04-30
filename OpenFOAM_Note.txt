@@ -229,7 +229,7 @@ system/blockMeshDict
     4 SHM需要设置的信息，一般为：读取stl，设置特征边/面的加密等级，选择需要加边界层的表面和设置层数，其余参数默认即可
 
 针对浮体不同区域进行加密
-    将stl手动拆分成多个区域，在stl中加regiones
+    将stl手动拆分成多个区域（这个暂时没找到普遍使用的方法，纯手工分区），在stl中加regiones
     这样会导致后面的浮体边界也会分区，只能再改边界
 
 OpenFOAM-7中，尺寸缩放关键字：convertToMeters 0.1;

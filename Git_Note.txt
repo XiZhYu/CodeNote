@@ -42,17 +42,10 @@ Git Bash命令--------------------------------------------------------------
 	[3] git push							将本地仓库的改动推送至远端仓库
 		  git push -u name_xzy master		git init对应的push方式
 		  git push name_xzy master/branch	push到master或branch
-
-两个本地仓库共同更新一个远程仓库
-	git clone https://... fileName_xzy
-	git remote -v  查看远程仓库信息
-	git pull  将远程仓库的更新pull到本地仓库
-	git push origin mstaer  将本地仓库的更新push到远端仓库
-
 		
 常用
-	git status							查看工作目录、缓存区
-	git log								查看已提交的快照
+	git status  查看工作目录、缓存区
+	git log  查看已提交的快照
 	  git log --graph --decorate --oneline
 	git checkout    检出（寻找到）
 	  [1]git checkout a1e8fb5    回滚到旧版本a1e8fb5，测试
@@ -77,6 +70,23 @@ Git Bash命令--------------------------------------------------------------
 	git commit -m "modify from A"
 	git pull
 	git push orgin master
+
+两个本地仓库共同更新一个远程仓库
+	git clone https://... fileName_xzy
+	git remote -v  查看远程仓库信息
+	git pull  将远程仓库的更新pull到本地仓库
+		若存在conflict
+		git status  找到冲突文件，修改到自己想要的
+		git add *
+		git commit -m "***"
+	git push origin mstaer  将本地仓库的更新push到远端仓库
+
+失误提交大文件，push失败，退回再提交
+	git log  找到大文件对应的提交记录
+	git reset ****  撤销该提交
+	git add *
+	git commit -m "correcr error"
+	git push -u origin master
 
 xiezhuoyu
 mechanics_xzy@163.com
