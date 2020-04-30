@@ -84,13 +84,16 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     checkMesh  //检查网格
     decomposePar  //区域分解
     interFoam  //求解器
-        interFoam -postprocess system/controlDict???
+        interFoam -postprocess system/controlDict  //仅执行后处理部分函数
     reconstructPar  //合并区域
     paraFoam  //可视化
         paraFoam -builtin
         paraFoam -builtin -case fileName  //可视化指定目录下CASE
+帮助
+    blockmesh -help
 文本编辑
     gedit name_xzy
+    code name_xzy
 文本显示
     more name-xzy
 并行计算
@@ -112,7 +115,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     length 10;
     width 5;
     ($length $width 0.0);  //宏-Macro
-    re #calc "$length*$width";  //inline calculation
+    re #calc "$length*$width";  //inline calculation，执行起来耗时长
 提取log文件中的数据，用于后处理
     foamLog log.interFoam  //该命令只能提取固定的变量
     grep xzy_name1 log.interFoam | awk -F "xzy_name2" '{print $xzy_i1}'|awk -F "xzy_name3" '{print $xzy_i2}' >time
@@ -131,13 +134,16 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
         foamCleanPolyMesh  //清除网格文件
         foamListTimes -rm  //清除时间文件
 复制算例(0\constant\system)
-    foamCloneCase A B
+    foamCloneCase A B  //针对FSI算例不好使
 如何确认参数选项
     startFrom banana;  //保证“banana”不出现在src中即可，OpenFOAM会报错，提示startFrom的正确选项有哪些
 场的映射（势流结果，映射至，粘流初始场）
     mapfields 映射源地址 -consistent -nonFunctionObjects -mapMethod cellPointInterpolate -sourceTime 0
-os-输出到文件
-Info-输出到终端
+输出
+    os-输出到文件
+    Info-输出到终端
+试错法，测试参数所有选项
+    method  banana;  //程序会报错，提示可用选项
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -190,6 +196,8 @@ Info-输出到终端
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 0
 边界类型，system/blockMeshDict中的边界类型为本质类型，如"type wall"，0/U中的边界类型为数值类型，如"type fixedValue"，两者需要一一对应
+本质边界类型
+    wall
 常见数值边界类型
     基本类型
         fixedValue
@@ -198,6 +206,8 @@ Info-输出到终端
         calculated
         mixed
         directionMixed
+        noSlip
+        empty
     衍生类型
         totalPressure  //处理回流，针对P
         inletOutlet  //向外zeroGradient，向内fixedValue，针对alpha
@@ -206,7 +216,7 @@ Info-输出到终端
 列举可用的边界条件类型
     overInterDyMFoam -listScalarBCs -listVectorBCs
 查看壁面函数类型
-    find $FOAM SRC/TurbulenceModels -name wallFunctions
+    find $FOAM_SRC/TurbulenceModels -name wallFunctions
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -221,6 +231,9 @@ system/blockMeshDict
 针对浮体不同区域进行加密
     将stl手动拆分成多个区域，在stl中加regiones
     这样会导致后面的浮体边界也会分区，只能再改边界
+
+OpenFOAM-7中，尺寸缩放关键字：convertToMeters 0.1;
+openFOAM-v1912中，尺寸缩放关键字：scale 0.1;
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -276,6 +289,17 @@ fvScheme中处理湍流问题壁面距离
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 system/fvSolution
 求解器设置
+    U
+    {
+        solver smoothSolver;
+        smoother symGaussSeidel;
+        tolerance 1e-05;
+        relTol 0;
+    }
+    //GAMG：可能需要初始场
+    //PCG+DIC：对称系数矩阵
+    //PBiCGStab+DILU：非对称系数矩阵
+    //smoothSolver+symGaussSeidel：非对称系数矩阵
     SIMPLE
     {
         consistent no;
@@ -293,12 +317,17 @@ system/fvSolution
         nOuterCorrectors 1;  //外层总循环，为1时退化至PISO
         nCorrectors 2;  //校正，若CFL>1，建议nCorrectors>=3
         nNonOrthogonalCorrectors 1;  //网格非正交校正
+
+        pRefCell 0;
+        pRefValue 0;  //将pRefCell号单元的压力值设定为pRefValue
     }
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 system/decomposeParDict
-区域分解策略：hierachical,manual,metis,multiLevel,none,scotch,simple,structured，建议选择scotch，参数最简单，且最小化区域边界网格数目
+区域分解策略：hierachical,manual,metis,multiLevel,none,scotch,simple,structured
+    建议选择scotch，参数最简单，且最小化区域边界网格数目
+    分区不恰当，容易导致p_rgh求解奇异，可考虑simple和hierachical来手动分区
 1G内存大概可以分解1,000,000网格
 并行计算时，需要知道计算机的实际核心数（非超线程的虚拟核心数），lscpu，实际核心数=cores per socket * sockets（自己电脑为2）
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
@@ -310,6 +339,7 @@ system/decomposeParDict
 2 网格质量依据：正交性orthogonality，倾斜度skewness，纵横比aspect ratio，膨胀率smoothness
 3 MRF-Multiple Reference Frame多重参考系,LTS-Local Time Step
 4 OpenFOAM中fvCFD.H文件是一个非常大的框架，包含了大部分的基本的类型
+5 log文件：ExecutionTime指的是elapsed CPU time，ClockTime指的是elapsed wall clock time
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
