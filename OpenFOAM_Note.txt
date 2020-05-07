@@ -346,8 +346,8 @@ system/decomposeParDict
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 将waves2Foam的造波消波功能集成到overInterDyMFoam求解器中，做一个新求解器waveOverInterDyMFoam
 1.在overInterDyMFoam基础上修改
-    1.0在waveFoam同级别文件夹中，复制overInterDyMFoa文件夹，以此为基础，新建waveOverInterDyMFoam文件夹
-    1.1对比waveFoam和overInterDyMFoam，修改overInterDyMFoam
+    1.0在waveFoam同级别文件夹中，复制overInterDyMFoa文件夹，以此为基础，新建waveOverInterDyMFoam文件夹（位置应该都差不多）
+    1.1对比waveFoam和overInterDyMFoam，修改overInterDyMFoam（自主性太强，按实际报错来修改）
         将以下脚本compareFiles.sh复制到waveFoam目录下，授权并执行
 ************************
 #!/bin/bash
@@ -357,9 +357,9 @@ do
 echo "============ BEGIN: "$i" ============"
 if [ "$i" == "waveFoam.C" ]
 then
-diff $i $FOAM_APP/solvers/multiphase/overInterDyMFoam/overInterDyMFoam.C
+diff $i $FOAM_APP/solvers/multiphase/interFoam/overInterDyMFoam/overInterDyMFoam.C
 else
-diff $i $FOAM_APP/solvers/multiphase/overInterDyMFoam/$i
+diff $i $FOAM_APP/solvers/multiphase/interFoam/overInterDyMFoam/$i
 fi
 echo
 echo "============= END: "$i" ============="
@@ -368,33 +368,39 @@ done
 ************************
         chmod a+x compareFiles.sh
         ./compareFiles.sh
-    1.2这里存在一个问题：定义重力向量与createFields.H
+    1.2这里存在一个问题：定义重力向量与createFields.H的顺序
 2.修改Make/options
     链接库文件（有问题）
 ************************
--DOFVERSION=<Numerized version number> \
--DEXTBRANCH=<OF-release = 0. FE-release = 1> \
--I$(WAVES_SRC)/waves2Foam/lnInclude \
--I$(WAVES_SRC)/waves2FoamSampling/lnInclude \
--I$(WAVES_GSL_INCLUDE)
--L$(WAVES_LIBBIN) \
--lwaves2Foam \
--lwaves2FoamSampling \
--L$(WAVES_GSL_LIB) \
--lgsl \
--lgslcblas
+    -I$(FOAM_SOLVERS)/multiphase/VoF \
+    -DOFVERSION=1912 \
+    -DEXTBRANCH=0 \
+    -DOFPLUSBRANCH=1 \
+    -DXVERSION=$(WAVES_XVERSION) \
+    -I$(WAVES_SRC)/waves2Foam/lnInclude \
+    -I$(WAVES_SRC)/waves2FoamSampling/lnInclude \
+    -I$(WAVES_GSL_INCLUDE)
+    -L$(WAVES_LIBBIN) \
+    -lOceanWave3D \
+    -Lwaves2Foam \
+    -Lwaves2FoamSampling \
+    -lwaves2FoamProcessing \
+    -L$(WAVES_GSL_LIB) \
+    -lgsl \
+    -lgslcblas
+由于命名冲突，删除掉原本的waveModel链接：-lwaveModels
 ************************
 3.修改Make/files
     可执行文件
 ************************
 waveOverInterDyMFoam.C
-EXE = $(WAVES_APPBIN)/waveOverInterDyMFoam
+EXE = $(FOAM_APPBIN)/waveOverInterDyMFoam
 ************************
+source waves2Foam/bin/bashrc
+wmake
 注意：
 waves2Foam和OF1912自带的造波模块的边界名称冲突，想办法修改waves2Foam的边界名称
-问题：
-文件位置？
-是否能将其从waves2Foam中独立出来？
+自主性很强，随机应变吧！
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
