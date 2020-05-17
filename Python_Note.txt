@@ -20,6 +20,7 @@
 #cmd方式安装
   python -m pip list  #查看已安装包
   python -m pip install matplotlib  #安装matplotlib包
+    pip --default-timeout=100 install -U numpy  #网络不好时，延长下载响应时间
 #常见包
   numpy-矩阵计算包
   math-数学函数包
@@ -234,25 +235,30 @@ plt.show()
 
 
 #文本数据的输入输出=======================================================
-f = open("/data.txt","w")  #打开，只写
+#文本写入
+f = open("/data.txt",mode="w")  #打开，只写
 f.write("HELLO!\nWORLD!!\n")  #写入内容
 f.close()  #关闭文件
 
-f = open("/data.txt","r")  #打开，只读
-str = f.read()  #读取数据
-print(str)
+#不规则文本数据提取
+f = open("/data.txt",mode="r")  #打开，只读
+#方法1
+str = f.read()  #整体存在string
+#方法2
+list = f.readlines()  #按行存为list
+listTemp = list[4:8:1]  #读取固定行数的数据
+listToArray = np.loadtxt(listTemp)  #将list数据转换为array数据（具有相同列数）  listToArray = np.loadtxt(f.readlines()[4:8:1])
 f.close()
 
-#txt数据读取
-fX = open('X.txt','r')  #打开数据文件文件
-X = np.loadtxt('X.txt')
-fY = open('Y.txt','r')  #打开数据文件文件
-Y = np.loadtxt('Y.txt')
-fZ = open('Z.txt','r')  #打开数据文件文件
-Z = np.loadtxt('Z.txt')
+#规则文本数据读取
+fX = open('X.txt',mode='r')  #打开数据文件文件
+X = np.loadtxt('X.txt')  #参数(fname, dtype=, comments='#', delimiter=None, converters=None, skiprows=0, usecols=None, unpack=False, ndmin=0)
 fX.close()
-fY.close()
-fZ.close()
+
+#数据查找
+list.startswith("This is comments:", beg=0,end=20)  #判断list是否以"This is comments:"开头，是则为true，否则为false
+list.endswith("This is comments:", beg=0,end=20)  #判断list是否以"This is comments:"结尾，是则为true，否则为false
+list.find("This is comments:", beg=0,end=20)  #判断list是否包含"This is comments:"，是则为索引值，否则为-1
 #文本数据的输入输出=======================================================
 
 #标注=====================================================================
