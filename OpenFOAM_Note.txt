@@ -60,7 +60,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     k-湍动能
     epsilon-湍流耗散率
     omega-
-    nuT*-SA模型参数
+    nuTilda-SA模型参数
     nut-湍流涡粘性洗漱
     *Final-指循环中*的倒数第一次计算（一般有更多的计算量）
     “U.*”-*表示任意字符
@@ -85,10 +85,11 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     decomposePar  //区域分解
     interFoam  //求解器
         interFoam -postprocess system/controlDict  //仅执行后处理部分函数
-    reconstructPar  //合并区域
+    reconstructPar -time 2.0:  //合并区域
     paraFoam  //可视化
         paraFoam -builtin
         paraFoam -builtin -case fileName  //可视化指定目录下CASE
+	foamToVTK  //转换成paraview格式
 帮助
     blockmesh -help
 文本编辑

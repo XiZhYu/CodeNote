@@ -13,6 +13,7 @@ FreeCAD
   界面比较质朴，bug还是有的
 
 导出格式：STL，IGS等
+openFOAM支持的是ASCII对应STL，在freeCAD里应该保存成ast格式
 
 键（参考blender）
   左键-选择
