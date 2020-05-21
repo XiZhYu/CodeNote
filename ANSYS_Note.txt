@@ -1,0 +1,98 @@
+ANSYS 2020R1
+    APDL/AQWA
+
+APDL命令流 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+重新显示：/replot
+
+单元类型：ET,1,SHELL63
+
+定义材料属性：MP,EX,1,2.1E11 $ MP,PRXY,1,0.3
+
+点：K,1,0.0,0.0,0.0
+直线：LSTR,1,2
+圆线：CIRCLE,1,3.0
+线拉面：ADRAG,1,2,3,4,,,9
+圆环面：PCIRC,175.0,200.0,,
+
+反转面法向：Areverse,8
+
+单元尺寸：LESIZE,ALL,,,2
+四边形网格，自由划分：MSHAPE,0 $ MSHKEY,0
+三角形网格，自由划分：MSHAPE,1 $ MSHKEY,0
+对所有面进行网格划分：AMESH,ALL
+
+清除单元：ACLEAR,7,10,1
+
+导出AQWA数据文件：ANSTOAQWA,ring,,,,,,,,
+
+APDLtoAQWA流程：定义单元；CAD建模；调整面法向；划分网格；导出
+APDL命令流 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+AQWA输入数据文件修改格式 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+file.dat
+JOB MESH  LINE
+TITLE               MESH FROM LINES PLANS/SCALING
+OPTIONS REST GOON NQTF PRPR PLFS END  
+RESTART   1  3
+    01    COOR
+    01NOD5
+    
+    0188801              100     -143.61      10
+    0188802              100     143.61       10
+    0188803              -100    -143.61      10
+    0188804              -100    143.61       10
+   
+   
+*    0160001             135.00     90.00         0
+*    0160002            -135.00     90.00         0
+*    0160003             135.00    -90.00         0
+*    0160004            -135.00    -90.00         0
+*    0160005                  0         0         0
+*    0160006                  0      -165         0
+    
+    0170001              90         -135        10
+    0170002              90         135         10
+    0170003              -90        -135        10
+    0170004              -90        135         10
+    0170005              0          0           10
+    0170006              -165       0           10
+                                   
+    0170007              30         -30         10
+    0170008              30         30          10
+    0170009              -30        -30         10    
+    0170010              -30        30          10    
+
+.................
+
+    02FPNT DIFF       (10)(70001,1)    
+ END02
+    02    FINI
+*
+    03    MATE * Material properties (may need editing)
+    03             1 3.01887419e+8
+ END03
+*
+    04    GEOM * Geometric properties (may need editing)   
+    04PMAS         1 6.790E+12  0.00      0.00     6.790E+12  0.00     1.061E+13
+ END04
+*
+    05    GLOB * Global analysis parameters (may need editing)
+    05DPTH    050.0
+    05DENS 1.025E+03
+ END05ACCG     9.810
+*
+    06    FDR1 * Frequencies and directions (may need editing)
+    06PERD    1    6      60.0      50.0      40.0     30.0       25.0      22.0
+    06PERD    7   12      20.0      19.0      18.0     17.0       16.0      15.0
+    06PERD   13   18      14.0      13.0      12.0     11.0       10.0       9.7
+    06PERD   19   24       9.0       8.5       8.0      7.5        7.0       6.5
+    06PERD   25   30       6.0       5.5      5.25      5.0       4.8       4.75
+ END06DIRN        25    -180.0     180.0
+    07    NONE
+    08    NONE
+AQWA输入数据文件格式 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+xiezhuoyu
+mechanics_xzy@163.com
