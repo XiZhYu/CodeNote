@@ -6,7 +6,7 @@ Git：现代软件版本管理系统，分散式版本管理
 基本概念-----------------------------------------------------------------
 远程仓库（repository）（中央仓库）：创建为裸仓库，即无工作目录的干净仓库，作为存储设施
 本地仓库：创建为非裸仓库，作为开发环境
-分支（branch）：master分支为主分支，一般为稳定可用的代码，其他分支可用于开发新版本，次分支的新功能后期可以合并至master分支
+分支（branch）：master分支为主分支，一般为稳定可用的代码，一般不在这上面操作，其他分支可用于开发新版本，次分支的新功能后期可以合并至master分支
 
 GitHub网页版--------------------------------------------------------------
 联网，提交每次的文档至网页版进行保存
@@ -32,7 +32,7 @@ Git Bash命令--------------------------------------------------------------
 		[2] git remote add name_xzy https://...			使本地与远端关联，name_xzy为https地址的别名,https地址是关键
 		[3] git push -u name_xzy master				将本地文件push至name_xzy仓库的master分支，可以直接用网址替代name_xzy
 		在不同本地仓库使用remote，别名name_xzy会记录在对应文件夹中的.git中，之后在对应文件夹使用push，即可push至对应的远程仓库
-三步走
+三步走（1.工作区--add-->2.暂存区--commit-->3.远程仓库）
 	[1] git add name.txt					缓存（计划改动），单独提交文件，可单独进行说明
 		  git add *						缓存当前文件夹的全部文件
 		  git add *.txt					缓存当前文件夹的全部txt文件
@@ -46,21 +46,42 @@ Git Bash命令--------------------------------------------------------------
 常用
 	git status  查看工作目录、缓存区
 	git log  查看已提交的快照
-	  git log --graph --decorate --oneline
+	  git log --graph --decorate --oneline  查看
+	git diff file.txt  查看被修改过，但是没有add的变化
+	git reflog  查看每一次命令操作
+	git remote -v  查看远程仓库信息
+
+	git branch  查看所在分支
 	git checkout    检出（寻找到）
 	  [1]git checkout a1e8fb5    回滚到旧版本a1e8fb5，测试
 	       git checkout a1e8fb5 test.cpp    回滚到旧版本a1e8fb5的test，测试
 	       git checkout HEAD test.cpp    若需要回到当前版本
 	  [2]git checkout master/branch    回到当前状态，继续开发
+
+	git checkout -b dev_xzy (/git switch -c dev_xzy)  创建并切换到dev_xzy分支
+		git branch dev_xzy  创建dev_xzy分支
+		git checkout dev_xzy (/git switch dev_xzy)  切换到dev_xzy分支
+	git merge dev_xzy  将dev_xzy分支合并到当前分支
+		git merge --no-ff -m "merge with no-ff" dev_xzy  即使后期删除分支，也会保留合并信息
+	git branch -d dev_xzy  删除dev_xzy分支
+
+	git checkout -- readme.txt  撤销readme.txt在工作区的修改（将远程仓库的readme.txt复制的本地工作区）
+
 	git reset    重设：撤销提交、缓存的快照，不推荐使用，除非撤销的就是本地上一个提交、缓存，push之后绝对不要用reset
 	  git reset --hard    作死清除所有未提交的更改及之后提交
+	git reset --hard a1d23f  去到指定版本a1d23f
+	git reset HEAD readme.txt  撤销readme.txt在暂存区的修改
+
 	git revert    撤销：实质是产生一个等价于“撤销提交的快照”的新提交，避免项目历史丢失
 	git clean -xf    删除当前目录未被跟踪的文件，以及git通常忽略的文件，常用于build空间之后
 	git rebase    将分支从一个提交移到了另一个
 	git fetch    拉取仓库中所有的分支
 	git merge    并入本地分支
 	git config -l  列出当前仓库的配置信息
-	git pull
+	git pull  将远程仓库合并到本地仓库
+	git rm readme.txt  本地删除readme.txt后，将readme.txt的记录从远程仓库清除（如果有需求）
+
+
 
 //A  台式
 //D  笔记本
