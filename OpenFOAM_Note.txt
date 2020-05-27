@@ -168,7 +168,7 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
         }
     }
     如果计算已完成，想基于结果处理数据，可以
-        1 在controlDict中新增functionObjects
+        1 在controlDict中新增functionObjects(很好用！！)
           interFoam -postProcess -dict system/controlDict -noZero (/-time 500:2000 / latestTime)
         2 将functionObjects单独写在system中
           interFoam -postProcess -dict system/function_add -noZero (/-time 500:2000 / latestTime)
@@ -235,6 +235,9 @@ system/blockMeshDict
 
 OpenFOAM-7中，尺寸缩放关键字：convertToMeters 0.1;
 openFOAM-v1912中，尺寸缩放关键字：scale 0.1;
+
+网格转换
+	fluentMeshToFoam -scale 0.01 fluent.msh  //ICEM网格转换
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =

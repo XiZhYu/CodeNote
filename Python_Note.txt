@@ -128,6 +128,8 @@ print(np.max(c))  #最值
 print(np.argmax(c))  #最值ID
 print(np.vstack((c,c)))  #纵向扩展
 print(np.hstack((c,c)))  #横向扩展
+np.size(c,0)  #列数
+np.size(c,1)  #行数
 #语法=====================================================================
 
 #二维数据表达=============================================================
@@ -271,7 +273,7 @@ r'$\alpha_1>\beta^2$'  #r$...$格式
 from scipy import interpolate  #插值包
 x = np.linsapce(1,100,20)
 y = np.sin(x)
-f = interpolate.interp1d(x, y, kind="cubic")  #'nearest', 'zero','linear','quadratic','cubic'
+f = interpolate.interp1d(x, y, kind="cubic")  #'nearest'最近, 'zero','slinear','linear'线性,'quadratic'二阶B样条,'cubic'三阶B样条
 interX = np.linsapce(1,100,100)
 interY = f(interX)
 #数据处理=====================================================================
