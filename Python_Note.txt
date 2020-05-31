@@ -130,6 +130,8 @@ print(np.vstack((c,c)))  #纵向扩展
 print(np.hstack((c,c)))  #横向扩展
 np.size(c,0)  #列数
 np.size(c,1)  #行数
+np.delete(c,i,j)  #删除数组c第j维的第i层数据
+np.argsort(c)  #排序
 #语法=====================================================================
 
 #二维数据表达=============================================================
@@ -141,6 +143,7 @@ np.size(c,1)  #行数
   # ^ s * o
   #空心处理，mfc='none'即markerFaceColor为空白
   #边界颜色，mec='black'即markerEdgeColor为黑色
+  .-点;o-圆；v-三角形；^-三角形；s-正方形；p-五边形；*-星型；h-六边形；H-六边形；D-钻石型
 #连续性数据linestyle=''
   # -- -
   # -. -- -
@@ -192,7 +195,7 @@ plt.show()  #显示图像
 x = np.random.normal(0,1,500)  #生成500个随机数
 y = np.random.normal(0,1,500)
 plt.figure(figsize=(5,5))  #创建一个figure，给定长宽
-plt.scatter(x,y,s=50,color='blue',alpha=0.5)  #尺寸50，透明度0.5
+plt.scatter(x,y,s=50,color='blue',alpha=0.5)  #尺寸50，透明度0.5！！！
 plt.show()
 
 #直方图
@@ -241,6 +244,8 @@ plt.show()
 f = open("/data.txt",mode="w")  #打开，只写
 f.write("HELLO!\nWORLD!!\n")  #写入内容
 f.close()  #关闭文件
+#数组输出至文本
+np.savetxt("data.txt",data)
 
 #不规则文本数据提取
 f = open("/data.txt",mode="r")  #打开，只读
@@ -270,7 +275,7 @@ r'$\alpha_1>\beta^2$'  #r$...$格式
 #标注=====================================================================
 
 #数据处理=====================================================================
-from scipy import interpolate  #插值包
+from scipy import interpolate  #0插值包
 x = np.linsapce(1,100,20)
 y = np.sin(x)
 f = interpolate.interp1d(x, y, kind="cubic")  #'nearest'最近, 'zero','slinear','linear'线性,'quadratic'二阶B样条,'cubic'三阶B样条
