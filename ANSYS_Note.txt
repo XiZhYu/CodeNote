@@ -25,11 +25,13 @@ APDL命令流 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = 
 
 导出AQWA数据文件：ANSTOAQWA,ring,,,,,,,,
 
-APDLtoAQWA流程：定义单元；CAD建模；调整面法向（指向流体）；划分网格；导出
+APDLtoAQWA流程：定义单元；CAD建模；调整面法向（指向流体）；划分网格（不要生成多余的面和线）；导出
 APDL命令流 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
 AQWA输入数据文件修改格式 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+*This is a comment
+*space is very important in this input file
 file.dat
 JOB MESH  LINE
 TITLE               MESH FROM LINES PLANS/SCALING
@@ -38,6 +40,7 @@ RESTART   1  3
     01    COOR
     01NOD5
     
+*probe
     0188801              100     -143.61      10
     0188802              100     143.61       10
     0188803              -100    -143.61      10
@@ -65,7 +68,7 @@ RESTART   1  3
 
 .................
 
-    02FPNT DIFF       (10)(70001,1)    
+    02FPNT DIFF       (10)(70001,1)    *70001~70010 ten point, get free surface height(FPNT)
  END02
     02    FINI
 *
