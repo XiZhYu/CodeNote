@@ -130,7 +130,7 @@
 	h = ezplot('x^2+y^2-9');
 	set(h,'linestyle','-','linewidth',3,'color','r')
 
-%极坐标作图：
+%极坐标作图：-
 	theta=0:0.1:pi;
 	rho=theta;
 	polar(theta,rho);
