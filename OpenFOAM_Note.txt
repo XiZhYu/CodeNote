@@ -218,6 +218,83 @@ alias of1912="source /media/xiezhuoyu/DATA/b_EZ/n_OpenFOAM/OpenFOAM-v1912/etc/ba
     overInterDyMFoam -listScalarBCs -listVectorBCs
 查看壁面函数类型
     find $FOAM_SRC/TurbulenceModels -name wallFunctions
+
+自定义初值、边界条件：1.codeStream;2.C++编程
+codeStream生成的代码在dynamicCode里面
+0.orig/U文件
+方法一
+inlet
+{
+  type fixedValue;
+  value #codeStream  //value值来自codeStream
+  {
+    codeInclude
+    #{
+      #include "fvCFD.H"  //大框架
+    #};
+    codeOptions
+    #{
+      -I$(LIB_SRC)/finiteVolume/lnInclude \
+      -I$(LIB_SRC)/meshTools/lnInclude
+    #};
+    codeLibs
+    #{
+      -lmeshTools \
+      -lfiniteVolume
+    #};
+    code
+    #{
+      const IOdictionary& d = static_cast<const IOdictionary&>
+      (
+        dict.parent().parent()  //0.orig -> background
+      );
+      const fvMesh& mesh = refCast<const fvMesh>(d.db());  //网格database
+      const label id = mesh.boundary().findPatchID("inlet");  //网格对应的边界ID
+      const fvPatch& patch = mesh.boundary()[id];  //边界网格
+      vectorField U(patch.size(), vector(0, 0, 0))  //定义速度场：边界单元数目，vector类型，且初始化为0
+      const scalar pi = constant::mathematical::pi;  //常数PI
+      forAll(U, i) //equivalent to for (int i=0; patch.size()<i; i++)  //边界所有单元面
+      {
+        const scalar x = patch.Cf()[i][0];  //边界单元x坐标 patch center face
+        const scalar y = patch.Cf()[i][1];  //边界单元y坐标 patch center face
+        const scalar z = patch.Cf()[i][2];  //边界单元z坐标 patch center face
+        U[i] =  vector(-1.0*(pow(z/0.5, 2) + pow((y-0.5)/0.5,2) - 1.0), 0.0, 0.0);  //速度边界表达式
+      }
+      U.writeEntry("", os);  //输出U
+    #};
+  };
+}
+方法二
+inlet
+{
+  type codedFixedValue;  //衍生于codeStream
+  value uniform (0 0 0);
+  redirectType name_of_BC_XZY;
+  codeOptions
+  #{
+    -I$(LIB_SRC)/finiteVolume/lnInclude \
+    -I$(LIB_SRC)/meshTools/lnInclude
+  #};
+  codeInclude
+  #{
+    #include "fvCFD.H"
+    #include <cmath>
+    #include <iostream>
+  #};
+  code
+  #{
+    const fvPatch& boundaryPatch = patch();  //该边界
+    const vectorField& Cf = boundaryPatch.Cf();  //边界单元面
+    vectorField& field = *this;  //场
+    scalar U_0 = 2, p_ctr = 8, p_r = 8;  //某常数
+    scalar t = this->db().time().value();  //时间信息！！
+    forAll(Cf, faceI)  //边界所有单元面
+    {
+      field[faceI] = vector(sin(t)*U_0*(1-(pow(Cf[faceI].y()-p_ctr,2))/(p_r*p_r)),0,0);  //边界条件表达式
+    }
+  #};
+}
+
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
