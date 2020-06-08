@@ -151,6 +151,10 @@ np.argsort(c)  #排序
   # dotted dashdot dashed solid
 #二维数据表达=============================================================
 
+from matplotlib.pylab import mpl
+mpl.rcParams['font.sans-serif'] = ['SimHei']   #显示中文
+mpl.rcParams['axes.unicode_minus']=False       #显示负号
+
 #CASE1====================================================================
 x = np.linspace(-3,3,100)
 y1 = 2*x + 1
@@ -160,6 +164,8 @@ plt.figure(figsize=(5,5))  #创建一个figure，给定长宽
 
 line1, = plt.plot(x,y1,color='red',linewidth=1.0,linestyle='--',marker='^',markersize=5,markevery=5,mfc='none')
 line2, = plt.plot(x,y2,color='blue',linewidth=1.0,linestyle='-.',marker='o',markersize=5,markevery=5,mfc='none')
+
+plt.title('frequency domain',fontsize=9,color='black')
 
 plt.xlabel('x')  #x轴标签
 plt.ylabel('y')
@@ -275,7 +281,7 @@ r'$\alpha_1>\beta^2$'  #r$...$格式
 #标注=====================================================================
 
 #数据处理=====================================================================
-from scipy import interpolate  #0插值包
+from scipy import interpolate  #插值包
 x = np.linsapce(1,100,20)
 y = np.sin(x)
 f = interpolate.interp1d(x, y, kind="cubic")  #'nearest'最近, 'zero','slinear','linear'线性,'quadratic'二阶B样条,'cubic'三阶B样条
