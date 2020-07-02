@@ -11,6 +11,8 @@ ParaView
     stream tracer-提取流线图
     ExtractBlock-提取某一命名区域，如提取浮体做可视化处理
     ExtractCellsByRegion-提取完整的单元
+
+最大值最小值，新建一个SpreadSheet view
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
