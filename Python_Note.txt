@@ -202,8 +202,8 @@ fig, ax = plt.subplots(3,2,figsize=(10,5))  #指定fig和ax，3*2个子图，长
 line1, = ax[0,0].plot(x,y1,color='red',linewidth=1.0,linestyle='--',marker='^',markersize=5,markevery=5,mfc='none')  #取(0,0)的axes，该线给名字line1，方便后面给legend
 line2, = ax[0,0].plot(x,y2,color='blue',linewidth=1.0,linestyle='-.',marker='o',markersize=5,markevery=5,mfc='none')
 ax[0,0].set_title('Title',fontsize=18)  #标题
-ax[0,0].set_xlabel('xlabel', fontsize=18,fontstyle='italic')  #x轴
-ax[0,0].set_ylabel('ylabel', fontsize=18,fontstyle='oblique')  #y轴
+ax[0,0].set_xlabel('xlabel', fontsize=18,fontstyle='italic',position=(0.5,0.0))  #x轴
+ax[0,0].set_ylabel('ylabel', fontsize=18,fontstyle='oblique',position=(0.0,0.5))  #y轴
 ax[0,0].legend(handles=[line1,line2],labels=['LINE1','LINE2'],loc='best')  #legend
 ax[0,0].grid(which='major',linestyle = "--",axis="both")      #设置背景网格线为虚线
 ax[0,0].set_xlim((-1,2))  #x轴区间
@@ -302,6 +302,10 @@ mark_inset(ax, axins, loc1=2, loc2=1, fc="none", ec='k', lw=1)
 # 显示
 plt.show()
 #局部放大图 - - - - - - - - - - - - - - - - - - - -
+
+#小功能
+#箭头标注
+ax.annotate("is arrow",xy=(1.0,0.1),xytext=(2.0,0.1),arrowprops=dict(arrowstyle="<->", color="black"))
 #作图 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
@@ -337,7 +341,7 @@ list.find("This is comments:", beg=0,end=20)  #判断list是否包含"This is co
 
 #数据处理 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 from scipy import interpolate  #插值包
-x = np.linsapce(1,100,20)
+x = np.linspace(1,100,20)
 y = np.sin(x)
 f = interpolate.interp1d(x, y, kind="cubic")  #'nearest'最近, 'zero','slinear','linear'线性,'quadratic'二阶B样条,'cubic'三阶B样条
 interX = np.linsapce(1,100,100)
