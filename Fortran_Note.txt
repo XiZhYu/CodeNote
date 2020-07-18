@@ -110,12 +110,12 @@ Fortran，祝你活得长久！
 	+ - * / **
 
 !关系运算符
-	>	.gt.
-	>=	.ge.
-	<	.lt.
-	<=	.le.
-	==	.eq.
-	/=	.ne.
+	>	.gt.  !great than
+	>=	.ge.  !great equal
+	<	.lt.  !lower than
+	<=	.le.  !lower equal
+	==	.eq.  !equal
+	/=	.ne.  !not equal
 	
 !逻辑运算符
 	.and.
@@ -129,19 +129,19 @@ Fortran，祝你活得长久！
 	cos(a)
 	sin(a)
 	tan(a)
-	atan(a)!arctana(a)
+	atan(a)  !arctana(a)
 	acos(a)
 	max(a,b,c)
 	min(a,b,c)
 	sqrt(a)
-	log(a)!loge(a)
+	log(a)  !loge(a)
 	log10(a)
 	exp(a)
 	mod(a,b)
-	sign(a,b)!b>0取|a|,b<0取-|a|
+	sign(a,b)  !b>0取|a|,b<0取-|a|
 	int(a)!强制转换
 	real(a)
-	complex(a,b)!合成复数
+	complex(a,b)  !合成复数
 !基本运算---------------------------------------------------------------------
 
 !基本技巧----------------------------------------------------------------------
