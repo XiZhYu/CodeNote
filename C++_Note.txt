@@ -152,7 +152,7 @@ bool-逻辑值
 	//模板vector，用于取代数组和指针
 	vector<double> a(3,0.0);//一维数组a，三个元素，初值为0.0
 	vector<vector<double>> b(3,vector<double>(2,0.0));//二维数组b，3行2列，初值为0.0
-	vector<vector<bouble>> c{{1,2,3},{4,5,6},{7,8,9}};//二维数组c，3行3列，
+	vector<vector<double>> c{{1,2,3},{4,5,6},{7,8,9}};//二维数组c，3行3列，
 	cout << c[0][0] << endl;//元素操作
 	c.push_back(vector<double>(3,10));//c新增第4行，且有三个元素，值为10
 	c[0].push_back(11);//c第一行尾新增一个元素，值为11
@@ -368,6 +368,38 @@ Eigen库的使用，矩阵运算
         }
     ]
 }
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+
+
+// = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+GSL库的使用
+// 头文件
+#include <gsl/gsl_sf_bessel.h>  //特殊函数
+#include <gsl/gsl_linalg.h>  //线性代数方程组求解
+#include <gsl/gsl_math.h>
+#include <gsl/gsl_complex.h>
+#include <gsl/gsl_complex_math.h>
+#include <gsl/gsl_vector.h>
+#include <gsl/gsl_matrix.h>
+
+// 数组
+int n = 3;
+gsl_vector_complex *v=gsl_vector_complex_alloc(n);
+gsl_complex z;
+GSL_SET_COMPLEX(&z, 1.0, 1.0);
+gsl_vector_complex_set(v,0,z);
+cout << GSL_REAL(gsl_vector_complex_get(v,0)) << "+" << GSL_IMAG(gsl_vector_complex_get(v,0)) << "i" << endl;
+
+// Bessel函数
+double a = 5.0;
+double y1 = gsl_sf_bessel_Jn(3,a);
+double y2 = gsl_sf_bessel_Yn(3,a);
+double y3 = gsl_sf_bessel_In(3,a);
+double y4 = gsl_sf_bessel_Kn(3,a);
+
+//复数
+gsl_complex cI = gsl_complex_rect(0.0,1.0);
+GSL_SET_COMPLEX(&z, 1.0, 0.0);
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 
