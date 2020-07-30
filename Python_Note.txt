@@ -153,7 +153,7 @@ mpl.rcParams['font.sans-serif'] = ['SimHei']   #显示中文
 mpl.rcParams['axes.unicode_minus']=False       #显示负号
 
 #标注：直接使用Tex格式（注意：是斜体）
-r'$\alpha_1>\beta^2$'  #r$...$格式
+r'$\alpha_{11}>\beta^{23}$'  #r$...$格式
 
 #二维数据表达 - - - - - - - - - - - - - - - - - - - -
 #数据最好不依赖颜色区分
