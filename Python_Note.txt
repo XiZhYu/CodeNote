@@ -38,7 +38,7 @@
     #三角函数：sin  cos  tan  asin  acos  atan
     #常用数值：math.pi  math.e
   import random  #导入随机数学计算包
-    #随机数函数：random()  seed()
+    #随机数函数：random()  seed() random.randint(0.0,1000.0)/1000.0
   import matplotlib.pyplot as plt  #画图-开头固定格式  #导入绘图包，给别名
 #常用包 = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
@@ -157,12 +157,14 @@ r'$\alpha_{11}>\beta^{23}$'  #r$...$格式
 
 #二维数据表达 - - - - - - - - - - - - - - - - - - - -
 #数据最好不依赖颜色区分
+  color='red'
+  color=(1.0,0.0,0.0)
 #间断性数据marker=''
   # 1 +
   # ^ o
   # ^ s o
   # ^ s * o
-  #空心处理，mfc='none'即markerFaceColor为空白
+  #空心处理，mfc='none'即markerFaceColor为空白，多个标记重叠时，空心可以很好的区分
   #边界颜色，mec='black'即markerEdgeColor为黑色
   .-点;o-圆；v-三角形；^-三角形；s-正方形；p-五边形；*-星型；h-六边形；H-六边形；D-钻石型
 #连续性数据linestyle=''
@@ -219,6 +221,7 @@ ax[0,0].spines['bottom'].set_position(('data',0))  #下边框放到y=0处
 ax[0,0].spines['left'].set_position(('data',0))  #左边框放到x=0处
 ax[0,0].text(-1,2,r'$The\ text$',fontdict={'size':'16','color':'red'})  #在(-1,2)添加文本
 plt.tight_layout()  #紧凑点，可以自动使图像的标签完全显示
+fig.savefig('C:\\Users\\zhuoyu\\Pictures\\test.png', dpi=600)  #曲线图600，云图1000
 plt.show()  #显示图像
 #二维图进阶 - - - - - - - - - - - - - - - - - - - -
 
