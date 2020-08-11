@@ -62,7 +62,7 @@
 a = 7
 b = 7.7
 c = True
-d = 7+8j
+d = 7+8j  #numpy中包含了复数运算
 print(type(a),"is",a,"\n",type(b),"is",b,"\n",type(c),"is",c,"\n",type(d),"is",d,"\n")
 
 #字符串String
