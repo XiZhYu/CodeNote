@@ -72,6 +72,14 @@ apt-get autoremove paraview 卸载软件paraview
 apt-get remove --purge paraview 卸载软件并清除配置文件
 apt-get autoremove  清理不需要的软件包
 
+apt-get download cmake  只下载deb安装包
+sudo dpkg -I ***.deb  查看依赖项，有的话，下载安装
+sudo dpkg -i ***.deb  离线安装软件
+
+sudo apt-cache depends ***
+for i in $(apt-cache depends *** | grep -E 'Depends|Recommends|Suggests' | cut -d ':' -f 2,3 | sed -e s/'<'/''/ -e s/'>'/''/); do sudo apt-get download $i 2>>errors.txt; done
+sudo dpkg -i *  全部安装
+
 unset $FOAM_RUN  清除某一个环境变量
 
 python3 xzy.py | tee recorder.log  记录屏幕输出至log文件
