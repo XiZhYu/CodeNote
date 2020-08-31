@@ -16,6 +16,7 @@ OpenFOAM-v1912安装
 在$HOME/.bashrc尾加（多版本需要注意不同）：
     source ~/OpenFOAM/OpenFOAM-v1912/etc/bashrc
 编译：
+    ./Allwmake
     编译ParaView（7小时，建议睡一觉）
         cd $WM_THIRD_PARTY_DIR
     <（安装失败可能为dash/bash问题，cd,ls -l /bin/sh）
@@ -37,6 +38,8 @@ OpenFOAM-v1912安装
     mkdir -p $FOAM_RUN
     cd $FOAM_RUN
     cp -r ../../OpenFOAM-v1912/tutorials .
+
+离线安装（将已装好OF的电脑系统上的DEB全部下载，copy到离线电脑上，再装OF）
 
 多版本共存
 gedit $HOME/.bashrc
@@ -497,6 +500,9 @@ system/decomposeParDict
 
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+waves2Foam程序下载，放在xiezhuoyu-1912/application/utility/
+（离线的话需要自行下载第三方包放在ThirdParty中）
+./Allwmake
 将waves2Foam的造波消波功能集成到overInterDyMFoam求解器中，做一个新求解器waveOverInterDyMFoam
 1.在overInterDyMFoam基础上修改
     1.0在waveFoam同级别文件夹中，复制overInterDyMFoa文件夹，以此为基础，新建waveOverInterDyMFoam文件夹（位置应该都差不多）
@@ -550,7 +556,7 @@ waveOverInterDyMFoam.C
 EXE = $(FOAM_APPBIN)/waveOverInterDyMFoam
 ************************
 source waves2Foam/bin/bashrc
-wmake
+wmake（需要OF环境变量）
 注意：
 waves2Foam和OF1912自带的造波模块的边界名称冲突，想办法修改waves2Foam的边界名称
 自主性很强，随机应变吧！
