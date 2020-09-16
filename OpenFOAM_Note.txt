@@ -388,8 +388,10 @@ system/blockMeshDict
 OpenFOAM-7中，尺寸缩放关键字：convertToMeters 0.1;
 openFOAM-v1912中，尺寸缩放关键字：scale 0.1;
 
+transformPoints -scale '(10.0 10.0 10.0)'  网格放大
+
 网格转换
-	fluentMeshToFoam -scale 0.01 fluent.msh  //ICEM网格转换
+	fluentMeshToFoam -scale 0.01 fluent.msh  //ICEM网格转换，之后修改polyMesh/boundary中的名字
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
