@@ -16,7 +16,7 @@ OpenFOAM-v1912安装
 在$HOME/.bashrc尾加（多版本需要注意不同）：
     source ~/OpenFOAM/OpenFOAM-v1912/etc/bashrc
 编译：
-    ./Allwmake
+    ./Allwmake -j  //并行编译
     编译ParaView（7小时，建议睡一觉）
         cd $WM_THIRD_PARTY_DIR
     <（安装失败可能为dash/bash问题，cd,ls -l /bin/sh）
@@ -392,6 +392,14 @@ transformPoints -scale '(10.0 10.0 10.0)'  网格放大
 
 网格转换
 	fluentMeshToFoam -scale 0.01 fluent.msh  //ICEM网格转换，之后修改polyMesh/boundary中的名字
+
+snappyHexMesh技巧
+    nCellsBetweenLevels 2;  //加密网格的过渡层数
+    refinementSurfaces  //针对浮体，针对的是网格层数
+    refinementRegions  //针对区域（可以指定浮体），针对的是区域
+    featureAngle 180;  //针对在过于尖锐的位置加边界层网格
+    maxBoundarySkewness 4;  //网格倾斜度太大报错时，改小此值
+    网格边界层的添加，要求比较严格，不一定很好加上，需要细致的调增
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
 
 // = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
